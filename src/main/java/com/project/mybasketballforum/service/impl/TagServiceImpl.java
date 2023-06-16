@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,4 +51,27 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
     //根据标签名来获得标签
     //直接在controller层中实现
 
+    //批量新建标签
+    @Override
+    public boolean addTags(String tags) throws Exception {
+        String[] split = tags.split(",");
+        List<Tag> tagList = new ArrayList<>();
+        for (String s : split) {
+            if (tagMapper.select(s) == null) {
+                Tag tag = new Tag();
+                tag.setName(s);
+                tagList.add(tag);
+            }
+        }
+        //限制一次最多新建5个标签
+        if(tagList.size() == 0 || tagList.size() > 5 || tagList == null){
+            throw new Exception("标签数量不符合要求");
+        }else{
+            //批量保存到数据库中
+            for (Tag tag : tagList) {
+                save(tag);
+            }
+        }
+        return true;
+    }
 }

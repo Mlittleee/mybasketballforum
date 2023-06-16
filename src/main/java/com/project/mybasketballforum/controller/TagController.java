@@ -84,7 +84,7 @@ public class TagController {
 
     //新建标签
     @PostMapping("/addTag")
-    public Result addTag(@RequestBody Tag tag) {
+    public Result<String> addTag(@RequestBody Tag tag) {
         if (tagServiceImpl.addTag(tag)) {
             return Result.success("新建标签成功");
         } else {
@@ -94,7 +94,7 @@ public class TagController {
 
     //删除标签
     @PostMapping("/deleteTag")
-    public Result deleteTag(@RequestBody Tag tag) {
+    public Result<String> deleteTag(@RequestBody Tag tag) {
         if (tagServiceImpl.deleteTag(tag.getTagId())) {
             return Result.success("删除标签成功");
         } else {
@@ -102,5 +102,39 @@ public class TagController {
         }
     }
 
+    //修改标签
+    @PostMapping("/updateTag")
+    public Result<String> updateTag(@RequestBody Tag tag) {
+        if (tagServiceImpl.updateTag(tag)) {
+            return Result.success("修改标签成功");
+        } else {
+            return Result.error("修改标签失败");
+        }
+    }
+
+    //批量新建标签
+    @PostMapping("/addTags")
+    public Result<String> addTags(String tags) throws Exception {
+        if (tagServiceImpl.addTags(tags)) {
+            return Result.success("批量新建标签成功");
+        } else {
+            return Result.error("批量新建标签失败");
+        }
+    }
+
+    //批量删除标签
+    @PostMapping("/deleteTags")
+    public Result<String> deleteTags(String ids) {
+        //将ids转换为数组
+        String[] idArray = ids.split(",");
+        //遍历数组
+        for (String id : idArray) {
+            //将id转换为Integer类型
+            Integer tagId = Integer.parseInt(id);
+            //调用删除方法
+            tagServiceImpl.deleteTag(tagId);
+        }
+        return Result.success("批量删除标签成功");
+    }
 }
 

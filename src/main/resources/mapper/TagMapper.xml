@@ -17,5 +17,12 @@
         from tag
     </select>
 
-
+    //根据标签名来获得标签
+    <select id="select" resultMap="BaseResultMap">
+        select
+            tag_id,
+            name,
+            create_time
+        from tag
+        where name = #{name}
 </mapper>

@@ -20,4 +20,8 @@ public interface TagMapper extends BaseMapper<Tag> {
 
     List<Tag> listAll();
 
+    //根据标签名来获得标签
+    Tag select(String tagName);
+
+
 }
