@@ -13,4 +13,16 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CommentService extends IService<Comment> {
 
+
+
+    /**
+     * 添加评论
+     *
+     * @param content   评论内容
+     * @param upperId   上一级评论id（或评论的帖子）
+     * @param userId    评论所属用户id
+     * @return 是否添加成功
+     */
+    boolean addComment(String content, Integer upperId, Integer userId);
+
 }

@@ -1,10 +1,11 @@
 package com.project.mybasketballforum.controller;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.project.mybasketballforum.pojo.Comment;
+import com.project.mybasketballforum.service.CommentService;
+import com.project.mybasketballforum.universal.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -18,6 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/comment")
 @CrossOrigin
 public class CommentController {
+    private CommentService commentService;
 
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
+    }
+
+    @PostMapping("/addComment")
+    public Result<String> addComment(String content, Integer upperId, Integer userId) {
+        if (commentService.addComment(content, upperId, userId)) {
+            return Result.success("评论成功");
+        } else {
+            return Result.error("评论失败");
+        }
+    }
 }
 

@@ -1,7 +1,10 @@
 package com.project.mybasketballforum;
 
+import com.project.mybasketballforum.pojo.Comment;
 import com.project.mybasketballforum.pojo.User;
+import com.project.mybasketballforum.service.CommentService;
 import com.project.mybasketballforum.service.UserService;
+import com.project.mybasketballforum.service.impl.CommentServiceImpl;
 import com.project.mybasketballforum.universal.QueryPageParam;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,9 @@ class MyBasketballForumApplicationTests {
 
     @Autowired
     private UserService UserService;
+
+    @Autowired
+    private CommentServiceImpl commentServiceimpl;
 
     @Test
     void contextLoads() {
@@ -53,4 +59,17 @@ class MyBasketballForumApplicationTests {
         System.out.println("name=="+name);
         }
 
+    @Test
+    void AddCommentTest() {
+        String content = "123test";
+        Integer upperId = 0;
+        Integer userId = 1;
+
+        boolean success = commentServiceimpl.addComment(content, upperId, userId); // 调用实例方法
+        if (success) {
+            System.out.println("Comment added successfully.");
+        } else {
+            System.out.println("Failed to add comment.");
+        }
+    }
 }
