@@ -3,6 +3,7 @@ package com.project.mybasketballforum.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -37,9 +38,9 @@ public class Tag implements Serializable {
     private String name;
 
     /**
-     * 标签描述
+     * 标签创建时间
      */
-    private String description;
+    private LocalDateTime createTime;
 
 
 }
