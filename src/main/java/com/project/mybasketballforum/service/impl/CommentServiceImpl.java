@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -29,4 +31,17 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         comment.setUserId(userId);
         return(this.save(comment));
     }
+
+    @Override
+    public boolean deleteComment(Integer commentId) {
+        // 调用MyBatis-Plus的removeById方法删除评论
+        return removeById(commentId);
+    }
+
+    @Override
+    public boolean deleteComments(List<Integer> commentIds) {
+        // 调用MyBatis-Plus的removeByIds方法批量删除评论
+        return this.removeByIds(commentIds);
+    }
+
 }

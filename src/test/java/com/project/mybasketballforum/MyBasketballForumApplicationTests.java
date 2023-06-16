@@ -1,15 +1,18 @@
 package com.project.mybasketballforum;
 
+import com.project.mybasketballforum.controller.CommentController;
 import com.project.mybasketballforum.pojo.Comment;
 import com.project.mybasketballforum.pojo.User;
 import com.project.mybasketballforum.service.CommentService;
 import com.project.mybasketballforum.service.UserService;
 import com.project.mybasketballforum.service.impl.CommentServiceImpl;
 import com.project.mybasketballforum.universal.QueryPageParam;
+import com.project.mybasketballforum.universal.Result;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -72,4 +75,29 @@ class MyBasketballForumApplicationTests {
             System.out.println("Failed to add comment.");
         }
     }
+
+    @Test
+    void deleteCommentTest(){
+        Integer commentId = 1; // 设置评论的 ID
+
+        boolean success = commentServiceimpl.deleteComment(commentId);
+        if (success) {
+            System.out.println("Comment deleted successfully.");
+        } else {
+            System.out.println("Failed to delete comment.");
+        }
+    }
+
+    @Test
+    void deleteCommentsTest() {
+        List<Integer> commentIds = Arrays.asList(4 , 5 , 6); // 设置评论的 ID 列表
+
+        boolean success = commentServiceimpl.deleteComments(commentIds);
+        if (success) {
+            System.out.println("Comments deleted successfully.");
+        } else {
+            System.out.println("Failed to delete comments.");
+        }
+    }
+
 }
