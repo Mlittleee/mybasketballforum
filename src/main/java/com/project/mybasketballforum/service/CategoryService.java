@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CategoryService extends IService<Category> {
 
+    // 管理员新增板块
+    boolean addCategory(Category category);
+
+    //管理员删除板块
+    boolean deleteCategory(Integer categoryId);
+
+
 }

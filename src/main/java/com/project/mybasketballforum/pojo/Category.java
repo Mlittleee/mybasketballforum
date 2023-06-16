@@ -32,6 +32,11 @@ public class Category implements Serializable {
     private Integer categoryId;
 
     /**
+     * 板块名称
+     */
+    private String categoryName;
+
+    /**
      * 板块描述
      */
     private String description;
