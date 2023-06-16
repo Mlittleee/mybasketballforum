@@ -53,20 +53,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             user.setPassword(password);
             user.setStatus(1);
             user.setRoleId(1);
+            //默认为男性(1代表男性,0代表女性)
+            user.setGender(1);
+            //默认邮箱为空
+            user.setEmail("");
             save(user);
+
+            //调试用
+            //System.out.println(user);
+
+
             //将用户的信息存到session中，这样可以通过过滤器
             //随机生成token作为登录令牌
             String token = UUID.randomUUID().toString();
             UserDto userDto = new UserDto();
             userDto.setUserId(user.getUserId());
             userDto.setToken(token);
-            userDto.setUserName(userName);
-            userDto.setPassword(password);
-            userDto.setEmail("");
-            //默认为男性(1代表男性,0代表女性)
-            userDto.setGender(1);
-            userDto.setStatus(1);
-            userDto.setRoleId(1);
+            userDto.setUserName(user.getUserName());
+            userDto.setPassword(user.getPassword());
+            userDto.setEmail(user.getEmail());
+            userDto.setGender(user.getGender());
+            userDto.setStatus(user.getStatus());
+            userDto.setRoleId(user.getRoleId());
+
+            //System.out.println(userDto);
+
             Map<String, Object> userMap = BeanUtil.beanToMap(userDto, new HashMap<>(),
                     CopyOptions.create()
                             .setIgnoreNullValue(true)
@@ -98,9 +109,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 userDto.setUserId(user.getUserId());
                 userDto.setToken(token);
                 userDto.setUserName(user.getUserName());
-                userDto.setEmail("");
-                //默认为男性(1代表男性,0代表女性)
-                userDto.setGender(1);
+                userDto.setEmail(user.getEmail());
+                userDto.setGender(user.getGender());
                 userDto.setPassword(user.getPassword());
                 userDto.setStatus(user.getStatus());
                 userDto.setRoleId(user.getRoleId());
@@ -120,6 +130,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 stringRedisTemplate.opsForHash().putAll(LOGIN_USER_KEY+token,userMap);
                 //设置有效期
                 stringRedisTemplate.expire(LOGIN_USER_KEY+token,LOGIN_USER_TTL, TimeUnit.MINUTES);
+
+
+                //调试用
+                System.out.println(userDto);
+
                 return userDto;
             }
         }
