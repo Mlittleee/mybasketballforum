@@ -27,4 +27,7 @@ public interface TagService extends IService<Tag> {
     //修改标签
     boolean updateTag(Tag tag);
 
+    //根据标签名获取标签
+    //直接在controller层中实现
+
 }

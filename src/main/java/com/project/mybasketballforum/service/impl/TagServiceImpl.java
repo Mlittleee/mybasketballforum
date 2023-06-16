@@ -47,5 +47,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         return tagMapper.updateById(tag) > 0;
     }
 
+    //根据标签名来获得标签
+    //直接在controller层中实现
 
 }

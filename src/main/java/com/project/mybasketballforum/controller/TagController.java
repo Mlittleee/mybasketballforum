@@ -42,6 +42,19 @@ public class TagController {
         return Result.success(tagServiceImpl.getAllTags());
     }
 
+    //标签查询(模糊查询)
+    @PostMapping("/query")
+    public Result<List<Tag>> queryUser(@RequestBody String tagName){
+        LambdaQueryWrapper<Tag> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(Tag::getName,tagName);
+        List<Tag> TagList= tagService.list(wrapper);
+        if (TagList.size()>0){
+            return Result.success(TagList);
+        }else {
+            return Result.error("没有查询到标签");
+        }
+    }
+
     //分页获取所有标签
     @PostMapping("/findPage")
     public Result<List<Tag>> findPage(@RequestBody QueryPageParam query) {
