@@ -6,6 +6,8 @@ import com.project.mybasketballforum.service.CategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -29,5 +31,16 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         return this.removeById(categoryId);
     }
 
+    //管理员修改板块
+    @Override
+    public boolean updateCategory(Category category) {
+        return this.updateById(category);
+    }
+
+    //查询所有分类
+    @Override
+    public List<Category> selectAllCategory() {
+        return this.list();
+    }
 
 }

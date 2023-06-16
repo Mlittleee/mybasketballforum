@@ -7,6 +7,8 @@ import com.project.mybasketballforum.universal.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
  *  前端控制器
@@ -41,6 +43,22 @@ public class CategoryController {
         } else {
             return Result.error("删除板块失败");
         }
+    }
+
+    // 管理员修改板块
+    @PostMapping("/updateCategory")
+    public Result<String> updateCategory(@RequestBody Category category) {
+        if (categoryService.updateCategory(category)) {
+            return Result.success("修改板块成功");
+        } else {
+            return Result.error("修改板块失败");
+        }
+    }
+
+    // 查询所有分类
+    @GetMapping("/selectAllCategory")
+    public Result<List<Category>> selectAllCategory() {
+        return Result.success(categoryService.selectAllCategory());
     }
 
 }

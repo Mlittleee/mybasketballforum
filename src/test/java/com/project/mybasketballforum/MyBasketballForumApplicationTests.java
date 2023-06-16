@@ -1,9 +1,11 @@
 package com.project.mybasketballforum;
 
+import com.project.mybasketballforum.pojo.Category;
 import com.project.mybasketballforum.pojo.Comment;
 import com.project.mybasketballforum.pojo.User;
 import com.project.mybasketballforum.service.CommentService;
 import com.project.mybasketballforum.service.UserService;
+import com.project.mybasketballforum.service.impl.CategoryServiceImpl;
 import com.project.mybasketballforum.service.impl.CommentServiceImpl;
 import com.project.mybasketballforum.universal.QueryPageParam;
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,9 @@ class MyBasketballForumApplicationTests {
 
     @Autowired
     private CommentServiceImpl commentServiceimpl;
+
+    @Autowired
+    private CategoryServiceImpl categoryServiceimpl;
 
     @Test
     void contextLoads() {
@@ -70,6 +75,15 @@ class MyBasketballForumApplicationTests {
             System.out.println("Comment added successfully.");
         } else {
             System.out.println("Failed to add comment.");
+        }
+    }
+
+    //测试查询所有板块
+    @Test
+    void selectAllCategoryTest(){
+        List<Category> list = categoryServiceimpl.selectAllCategory();
+        for (Category category : list) {
+            System.out.println(category);
         }
     }
 }
