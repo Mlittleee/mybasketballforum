@@ -17,4 +17,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
 
+    // 管理员新增板块
+    @Override
+    public boolean addCategory(Category category) {
+        return this.save(category);
+    }
+
+    //管理员删除板块
+    @Override
+    public boolean deleteCategory(Integer categoryId) {
+        return this.removeById(categoryId);
+    }
+
+
 }

@@ -7,11 +7,12 @@
         <id column="category_id" property="categoryId" />
         <result column="description" property="description" />
         <result column="user_id" property="userId" />
+        <result column="category_name" property="categoryName" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        category_id, description, user_id
+        category_id, description, user_id, category_name
     </sql>
 
 </mapper>

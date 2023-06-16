@@ -1,6 +1,8 @@
 package com.project.mybasketballforum;
 
+import com.project.mybasketballforum.pojo.Category;
 import com.project.mybasketballforum.pojo.User;
+import com.project.mybasketballforum.service.CategoryService;
 import com.project.mybasketballforum.service.UserService;
 import com.project.mybasketballforum.universal.QueryPageParam;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,9 @@ class MyBasketballForumApplicationTests {
 
     @Autowired
     private UserService UserService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Test
     void contextLoads() {
@@ -53,4 +58,13 @@ class MyBasketballForumApplicationTests {
         System.out.println("name=="+name);
         }
 
+    //测试新增板块
+    @Test
+    void addCategory() {
+        Category category = new Category();
+        category.setCategoryName("NBA");
+        category.setUserId(1);
+        category.setDescription("这里是NBA板块，欢迎大家来讨论");
+        categoryService.addCategory(category);
+    }
 }
