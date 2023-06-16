@@ -2,7 +2,10 @@ package com.project.mybasketballforum.mapper;
 
 import com.project.mybasketballforum.pojo.Tag;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.project.mybasketballforum.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +17,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface TagMapper extends BaseMapper<Tag> {
+
+    List<Tag> listAll();
 
 }

@@ -9,5 +9,13 @@
         <result column="create_time" property="createTime" />
     </resultMap>
 
+    <select id="listAll" resultType="com.project.mybasketballforum.pojo.Tag">
+        select
+            tag_id,
+            name,
+            create_time
+        from tag
+    </select>
+
 
 </mapper>
