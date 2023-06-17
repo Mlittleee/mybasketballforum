@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.project.mybasketballforum.pojo.Tag">
         <id column="tag_id" property="tagId" />
         <result column="name" property="name" />
+        <result column="post_id" property="postId" />
     </resultMap>
 
 
@@ -13,7 +14,8 @@
     <select id="listAll" resultType="com.project.mybasketballforum.pojo.Tag">
         select
             tag_id,
-            name
+            name,
+            post_id
         from tag
     </select>
 

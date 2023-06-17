@@ -37,5 +37,9 @@ public class Tag implements Serializable {
      */
     private String name;
 
+    /**
+     *标签所属的帖子id
+     */
+    private Integer postId;
 
 }
