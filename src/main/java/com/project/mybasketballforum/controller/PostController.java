@@ -1,10 +1,11 @@
 package com.project.mybasketballforum.controller;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.project.mybasketballforum.pojo.Post;
+import com.project.mybasketballforum.service.impl.PostServiceImpl;
+import com.project.mybasketballforum.universal.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -18,5 +19,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/post")
 @CrossOrigin
 public class PostController {
+
+    @Autowired
+    private PostServiceImpl postServiceimpl;
+
+    //发布（新增）帖子
+    @PostMapping("/addPost")
+    public Result<Integer> addPost(@RequestBody Post post) {
+        if (postServiceimpl.addPost(post)) {
+            Post post1 = postServiceimpl.selectPostByTitle(post.getTitle());
+            int postId = post1.getPostId();
+            return Result.success(postId);
+        } else {
+            return Result.error("发布帖子失败");
+        }
+    }
+
+    //根据帖子标题查询帖子
+    @GetMapping("/selectPostByTitle")
+    public Result<Post> selectPostByTitle(@RequestParam String title) {
+        Post post = postServiceimpl.selectPostByTitle(title);
+        if (post != null) {
+            return Result.success(post);
+        } else {
+            return Result.error("没有查询到该帖子");
+        }
+    }
 
 }

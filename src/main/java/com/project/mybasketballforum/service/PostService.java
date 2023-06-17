@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PostService extends IService<Post> {
 
+    //发布（新增）帖子
+    boolean addPost(Post post);
+
+    //根据帖子标题查询帖子
+    Post selectPostByTitle(String title);
+
 }
