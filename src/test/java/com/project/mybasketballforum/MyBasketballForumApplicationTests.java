@@ -1,5 +1,6 @@
 package com.project.mybasketballforum;
 
+import com.project.mybasketballforum.dto.CategoryDto;
 import com.project.mybasketballforum.pojo.Category;
 import com.project.mybasketballforum.pojo.Comment;
 import com.project.mybasketballforum.pojo.Tip;
@@ -86,9 +87,9 @@ class MyBasketballForumApplicationTests {
     //测试查询所有板块
     @Test
     void selectAllCategoryTest(){
-        List<Category> list = categoryServiceimpl.selectAllCategory();
-        for (Category category : list) {
-            System.out.println(category);
+        List<CategoryDto> list = categoryServiceimpl.selectAllCategory();
+        for (CategoryDto categoryDto : list) {
+            System.out.println(categoryDto);
         }
     }
 

@@ -53,18 +53,8 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
 
     //批量新建标签
     @Override
-    public boolean addTags(String tags) throws Exception {
-        String[] split = tags.split(",");
-        List<Tag> tagList = new ArrayList<>();
-        for (String s : split) {
-            if (tagMapper.select(s) == null) {
-                Tag tag = new Tag();
-                tag.setName(s);
-                tagList.add(tag);
-            }
-        }
-        //限制一次最多新建5个标签
-        if(tagList.size() == 0 || tagList.size() > 5 || tagList == null){
+    public boolean addTags(List<Tag> tagList) throws Exception {
+        if(tagList.size() == 0 || tagList == null){
             throw new Exception("标签数量不符合要求");
         }else{
             //批量保存到数据库中

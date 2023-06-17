@@ -30,7 +30,7 @@ public interface TagService extends IService<Tag> {
     //根据标签名获取标签
     //直接在controller层中实现
 
-    //piliang新建标签
-    boolean addTags(String tags) throws Exception;
+    //批量新建标签
+    boolean addTags(List<Tag> tagList) throws Exception;
 
 }

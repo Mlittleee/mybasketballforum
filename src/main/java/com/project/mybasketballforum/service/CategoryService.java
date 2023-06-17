@@ -1,5 +1,6 @@
 package com.project.mybasketballforum.service;
 
+import com.project.mybasketballforum.dto.CategoryDto;
 import com.project.mybasketballforum.pojo.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -25,7 +26,7 @@ public interface CategoryService extends IService<Category> {
     boolean updateCategory(Category category);
 
     //查询所有分类
-    List<Category> selectAllCategory();
+    List<CategoryDto> selectAllCategory();
 
 
 }
