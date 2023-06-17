@@ -28,7 +28,7 @@ public class PostController {
     public Result<Integer> addPost(@RequestBody Post post) {
         if (postServiceimpl.addPost(post)) {
             Post post1 = postServiceimpl.selectPostByTitle(post.getTitle());
-            int postId = post1.getPostId();
+            Integer postId = post1.getPostId();
             return Result.success(postId);
         } else {
             return Result.error("发布帖子失败");

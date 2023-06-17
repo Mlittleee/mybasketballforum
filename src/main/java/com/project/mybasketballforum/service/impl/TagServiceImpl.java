@@ -53,12 +53,13 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
 
     //批量新建标签
     @Override
-    public boolean addTags(List<Tag> tagList) throws Exception {
+    public boolean addTags(List<Tag> tagList, Integer postId) throws Exception {
         if(tagList.size() == 0 || tagList == null){
             throw new Exception("标签数量不符合要求");
         }else{
             //批量保存到数据库中
             for (Tag tag : tagList) {
+                tag.setPostId(postId);
                 save(tag);
             }
         }

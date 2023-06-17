@@ -114,8 +114,8 @@ public class TagController {
 
     //批量新建标签
     @PostMapping("/addTags")
-    public Result<String> addTags(@RequestBody List<Tag> tagList) throws Exception {
-        if (tagServiceImpl.addTags(tagList)) {
+    public Result<String> addTags(@RequestBody List<Tag> tagList, @RequestBody Integer postId) throws Exception {
+        if (tagServiceImpl.addTags(tagList, postId)) {
             return Result.success("批量新建标签成功");
         } else {
             return Result.error("批量新建标签失败");
