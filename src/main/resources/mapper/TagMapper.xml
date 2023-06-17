@@ -9,6 +9,8 @@
         <result column="create_time" property="createTime" />
     </resultMap>
 
+
+
     <select id="listAll" resultType="com.project.mybasketballforum.pojo.Tag">
         select
             tag_id,
@@ -17,7 +19,8 @@
         from tag
     </select>
 
-    //根据标签名来获得标签
+</mapper>
+    <!--//根据标签名来获得标签
     <select id="select" resultMap="BaseResultMap">
         select
             tag_id,
@@ -25,4 +28,5 @@
             create_time
         from tag
         where name = #{name}
-</mapper>
+    </select>-->
+
