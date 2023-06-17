@@ -10,13 +10,13 @@
         <result column="content" property="content" />
         <result column="view_count" property="viewCount" />
         <result column="like_count" property="likeCount" />
-        <result column="category_id" property="categoryId" />
+        <result column="category_name" property="categoryName" />
         <result column="user_id" property="userId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        post_id, description, title, content, view_count, like_count, category_id, user_id
+        post_id, description, title, content, view_count, like_count, category_name, user_id
     </sql>
 
 </mapper>

@@ -57,9 +57,9 @@ public class Post implements Serializable {
     private Long likeCount;
 
     /**
-     * 所属板块id
+     * 所属板块名称
      */
-    private Integer categoryId;
+    private String categoryName;
 
     /**
      * 帖子所属用户id

@@ -25,11 +25,9 @@ public class PostController {
 
     //发布（新增）帖子
     @PostMapping("/addPost")
-    public Result<Integer> addPost(@RequestBody Post post) {
+    public Result<String> addPost(@RequestBody Post post) {
         if (postServiceimpl.addPost(post)) {
-            Post post1 = postServiceimpl.selectPostByTitle(post.getTitle());
-            Integer postId = post1.getPostId();
-            return Result.success(postId);
+            return Result.success("发布帖子成功");
         } else {
             return Result.error("发布帖子失败");
         }
