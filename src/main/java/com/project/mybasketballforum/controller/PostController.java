@@ -46,4 +46,15 @@ public class PostController {
         }
     }
 
+    //查找最后一条帖子的id
+    @GetMapping("/selectLastPostId")
+    public Result<Integer> selectLastPostId() {
+        Integer postId = postServiceimpl.selectLastPostId();
+        if (postId != null) {
+            return Result.success(postId);
+        } else {
+            return Result.error("没有查询到最后一条帖子的id");
+        }
+    }
+
 }

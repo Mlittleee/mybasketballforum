@@ -31,6 +31,6 @@ public interface TagService extends IService<Tag> {
     //直接在controller层中实现
 
     //批量新建标签
-    boolean addTags(List<Tag> tagList, Integer postId) throws Exception;
+    boolean addTags(List<Tag> tagList) throws Exception;
 
 }

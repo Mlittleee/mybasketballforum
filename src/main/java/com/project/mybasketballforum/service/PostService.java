@@ -19,4 +19,7 @@ public interface PostService extends IService<Post> {
     //根据帖子标题查询帖子
     Post selectPostByTitle(String title);
 
+    //查找最后一条帖子的id
+    Integer selectLastPostId();
+
 }

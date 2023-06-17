@@ -114,4 +114,11 @@ class MyBasketballForumApplicationTests {
         boolean success = postServiceimpl.addPost(post);
         System.out.println(success);
     }
+
+    //测试查找最后一条帖子
+    @Test
+    void selectLastPost(){
+        Integer id = postServiceimpl.selectLastPostId();
+        System.out.println(id);
+    }
 }
