@@ -1,6 +1,7 @@
 package com.project.mybasketballforum.controller;
 
 
+import com.project.mybasketballforum.dto.PostCardDto;
 import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.service.impl.PostServiceImpl;
 import com.project.mybasketballforum.universal.Result;
@@ -52,6 +53,17 @@ public class PostController {
             return Result.success(postId);
         } else {
             return Result.error("没有查询到最后一条帖子的id");
+        }
+    }
+
+    //返回一条帖子的信息（测试用）
+    @GetMapping("/getOnePost")
+    public Result<PostCardDto> getOnePost() {
+        PostCardDto postcard = postServiceimpl.getOnePost();
+        if (postcard != null) {
+            return Result.success(postcard);
+        } else {
+            return Result.error("没有查询到该帖子");
         }
     }
 

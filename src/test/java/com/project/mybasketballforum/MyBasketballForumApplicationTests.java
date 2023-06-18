@@ -1,6 +1,7 @@
 package com.project.mybasketballforum;
 
 import com.project.mybasketballforum.dto.CategoryDto;
+import com.project.mybasketballforum.dto.PostCardDto;
 import com.project.mybasketballforum.dto.TagDto;
 import com.project.mybasketballforum.pojo.*;
 import com.project.mybasketballforum.service.CommentService;
@@ -123,7 +124,7 @@ class MyBasketballForumApplicationTests {
         System.out.println(id);
     }
 
-    //更具postId查找标签
+    //根据postId查找标签
     @Test
     void getTagsByPostId() {
         Integer postId = 1;
@@ -131,5 +132,12 @@ class MyBasketballForumApplicationTests {
         for (TagDto tag : tagList) {
             System.out.println(tag);
         }
+    }
+
+    //测试返回一条帖子卡片的消息
+    @Test
+    void getPostCard(){
+        PostCardDto post = postServiceimpl.getOnePost();
+        System.out.println(post);
     }
 }

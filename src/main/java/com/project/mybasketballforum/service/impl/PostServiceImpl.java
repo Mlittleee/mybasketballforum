@@ -2,10 +2,12 @@ package com.project.mybasketballforum.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.project.mybasketballforum.dto.PostCardDto;
 import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.mapper.PostMapper;
 import com.project.mybasketballforum.service.PostService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,6 +20,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements PostService {
+
+    @Autowired
+    private UserServiceImpl userServiceimpl;
 
     //发布（新增）帖子
     @Override
@@ -50,5 +55,23 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         queryWrapper.last("limit 1");
         Post post = this.baseMapper.selectOne(queryWrapper);
         return post.getPostId();
+    }
+
+    //返回一条帖子的信息（测试用）
+    @Override
+    public PostCardDto getOnePost() {
+        QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("post_id");
+        queryWrapper.last("limit 1");
+        Post post = this.baseMapper.selectOne(queryWrapper);
+        PostCardDto postCardDto = new PostCardDto();
+        postCardDto.setId(post.getPostId());
+        postCardDto.setTitle(post.getTitle());
+        postCardDto.setDescription(post.getDescription());
+        postCardDto.setCreateTime(post.getCreateTime());
+        postCardDto.setUserName(userServiceimpl.selectUserById(post.getUserId()));
+        postCardDto.setLikeCount(post.getLikeCount());
+        postCardDto.setViewCount(post.getViewCount());
+        return postCardDto;
     }
 }

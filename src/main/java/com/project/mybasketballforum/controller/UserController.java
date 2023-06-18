@@ -41,8 +41,6 @@ public class UserController {
     @Autowired
     private UserServiceImpl userServiceimpl;
 
-    @Autowired
-    private UserMapper userMapper;
 
     //用户登录(自动注册)
     @PostMapping("/login")
@@ -149,6 +147,17 @@ public class UserController {
         if (result.getRecords().size() > 0) {
             return Result.success(result.getRecords(), total);
         } else {
+            return Result.error("没有查询到用户");
+        }
+    }
+
+    //根据id查询用户名称
+    @GetMapping("/getUserNameById")
+    public Result<String> getUserNameById(Integer id){
+        User user = iuserService.getById(id);
+        if (user!=null){
+            return Result.success(user.getUserName());
+        }else {
             return Result.error("没有查询到用户");
         }
     }

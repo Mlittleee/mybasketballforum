@@ -16,5 +16,9 @@ import java.util.Map;
 public interface UserService extends IService<User> {
     //用户登录
     User login(@RequestBody Map<String,String> map, HttpSession session);
+
     List<User> listAll();
+
+    //根据id查询用户名称
+    String selectUserById(Integer id);
 }

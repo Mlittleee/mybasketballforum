@@ -1,5 +1,6 @@
 package com.project.mybasketballforum.service;
 
+import com.project.mybasketballforum.dto.PostCardDto;
 import com.project.mybasketballforum.pojo.Post;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -21,5 +22,8 @@ public interface PostService extends IService<Post> {
 
     //查找最后一条帖子的id
     Integer selectLastPostId();
+
+    //返回一条帖子的信息（测试用）
+    PostCardDto getOnePost();
 
 }

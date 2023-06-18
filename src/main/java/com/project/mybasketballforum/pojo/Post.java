@@ -50,12 +50,12 @@ public class Post implements Serializable {
     /**
      * 浏览量
      */
-    private Long viewCount;
+    private Integer viewCount;
 
     /**
      * 点赞量
      */
-    private Long likeCount;
+    private Integer likeCount;
 
     /**
      * 所属板块名称

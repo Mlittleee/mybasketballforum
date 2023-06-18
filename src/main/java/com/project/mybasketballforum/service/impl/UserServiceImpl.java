@@ -145,6 +145,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return userMapper.listAll();
     }
 
+    //根据主键id查询
+    public String selectUserById(Integer userId){
+        User user = userMapper.selectById(userId);
+        return user.getUserName();
+    }
+
 }
 
 
