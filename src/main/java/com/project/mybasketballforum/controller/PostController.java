@@ -9,8 +9,12 @@ import com.github.pagehelper.PageHelper;
 import com.project.mybasketballforum.dto.PostCardDto;
 import com.project.mybasketballforum.dto.PostCardListDto;
 import com.project.mybasketballforum.pojo.Post;
+import com.project.mybasketballforum.pojo.Postcard;
 import com.project.mybasketballforum.pojo.User;
+import com.project.mybasketballforum.service.PostService;
+import com.project.mybasketballforum.service.PostcardService;
 import com.project.mybasketballforum.service.impl.PostServiceImpl;
+import com.project.mybasketballforum.service.impl.PostcardServiceImpl;
 import com.project.mybasketballforum.universal.QueryPageParam;
 import com.project.mybasketballforum.universal.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +38,15 @@ public class PostController {
 
     @Autowired
     private PostServiceImpl postServiceimpl;
+
+    @Autowired
+    private PostService ipostService;
+
+    @Autowired
+    private PostcardServiceImpl postcardServiceimpl;
+
+    @Autowired
+    private PostcardService ipostcardService;
 
     //发布（新增）帖子
     @PostMapping("/addPost")
@@ -78,13 +91,36 @@ public class PostController {
         }
     }
 
-    //返回帖子列表，不进行标题的查询，查询后面在进行时实现
-    /*@GetMapping("/getPostListPage")
+    //返回帖子列表，可以根据标题进行，因为自己封装的dto类无法使用QueryWrapper,所以将额外数据的封装交给后端去做
+    //分页查询
+    @PostMapping("/findPostCardPage")
     public Result<List<PostCardListDto>> getPostList(@RequestBody QueryPageParam query) {
-        //使用pageHelper进行分页
-        PageHelper.startPage(query.getPageNum(), query.getPageSize());
-        List<PostCardListDto> postcardlist = postServiceimpl.getPostList();
 
-    }*/
+        HashMap param = query.getParam();
+        Page<Postcard> postcardPage = new Page<>();
+        postcardPage.setSize(query.getPageSize());
+        postcardPage.setCurrent(query.getPageNum());
 
+        LambdaQueryWrapper<Post> wrapper1 = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<Postcard> wrapper2 = new LambdaQueryWrapper<>();
+        if (param != null) {
+            String title = (String) param.get("title");
+            if (StrUtil.isNotBlank(title) && !title.equals("null")) {
+                wrapper1.like(Post::getTitle, title);
+                //将wrapper1转换为List
+                List<Post> postList = ipostService.list(wrapper1);
+                postcardServiceimpl.postToPostcard(postList);
+                wrapper2.like(Postcard::getTitle, title);
+            }
+        }
+        IPage result = ipostcardService.page(postcardPage, wrapper2);
+        //获取总记录条数total
+        long total = result.getTotal();
+        //如果非空，则返回
+        if (result.getRecords().size() > 0) {
+            return Result.success(result.getRecords(), total);
+        } else {
+            return Result.error("没有查询到帖子");
+        }
+    }
 }

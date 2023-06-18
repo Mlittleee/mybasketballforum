@@ -5,6 +5,7 @@ import com.project.mybasketballforum.dto.CategoryDto;
 import com.project.mybasketballforum.dto.PostCardDto;
 import com.project.mybasketballforum.dto.PostCardListDto;
 import com.project.mybasketballforum.dto.TagDto;
+import com.project.mybasketballforum.mapper.PostMapper;
 import com.project.mybasketballforum.pojo.*;
 import com.project.mybasketballforum.service.CommentService;
 import com.project.mybasketballforum.service.UserService;
@@ -37,6 +38,12 @@ class MyBasketballForumApplicationTests {
 
     @Autowired
     private TagServiceImpl tagServiceimpl;
+
+    @Autowired
+    private PostMapper postMapper;
+
+    @Autowired
+    private PostcardServiceImpl postcardServiceimpl;
 
     @Test
     void contextLoads() {
@@ -161,4 +168,12 @@ class MyBasketballForumApplicationTests {
             System.out.println("null");
         }
     }
+
+    //测试新建的数据库表
+    @Test
+    void testNewTable() {
+        List<Post> postList = postMapper.selectList(null);
+        postcardServiceimpl.postToPostcard(postList);
+    }
+
 }
