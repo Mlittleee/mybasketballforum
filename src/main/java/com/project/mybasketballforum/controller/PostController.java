@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
 import com.project.mybasketballforum.dto.PostCardDto;
 import com.project.mybasketballforum.dto.PostCardListDto;
+import com.project.mybasketballforum.dto.PostViewDto;
 import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.pojo.Postcard;
 import com.project.mybasketballforum.pojo.User;
@@ -121,6 +122,17 @@ public class PostController {
             return Result.success(result.getRecords(), total);
         } else {
             return Result.error("没有查询到帖子");
+        }
+    }
+
+    //根据帖子id返回帖子详情
+    @GetMapping("/getPostDetail")
+    public Result<PostViewDto> getPostById(@RequestParam Integer postId) {
+        PostViewDto postcard = postServiceimpl.getPostViewById(postId);
+        if (postcard != null) {
+            return Result.success(postcard);
+        } else {
+            return Result.error("没有查询到该帖子");
         }
     }
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.project.mybasketballforum.dto.PostCardDto;
 import com.project.mybasketballforum.dto.PostCardListDto;
+import com.project.mybasketballforum.dto.PostViewDto;
 import com.project.mybasketballforum.dto.TagDto;
 import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.mapper.PostMapper;
@@ -105,5 +106,18 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             postCardListDtoList.add(postCardListDto);
         }
         return postCardListDtoList;
+    }
+
+    //根据帖子id返回帖子信息
+    @Override
+    public PostViewDto getPostViewById(Integer id) {
+        Post post = this.baseMapper.selectById(id);
+        PostViewDto postViewDto = new PostViewDto();
+        postViewDto.setTitle(post.getTitle());
+        postViewDto.setContent(post.getContent());
+        postViewDto.setCreateTime(post.getCreateTime());
+        postViewDto.setUserName(userServiceimpl.selectUserById(post.getUserId()));
+        postViewDto.setCategoryName(post.getCategoryName());
+        return postViewDto;
     }
 }

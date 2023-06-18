@@ -1,10 +1,7 @@
 package com.project.mybasketballforum;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.project.mybasketballforum.dto.CategoryDto;
-import com.project.mybasketballforum.dto.PostCardDto;
-import com.project.mybasketballforum.dto.PostCardListDto;
-import com.project.mybasketballforum.dto.TagDto;
+import com.project.mybasketballforum.dto.*;
 import com.project.mybasketballforum.mapper.PostMapper;
 import com.project.mybasketballforum.pojo.*;
 import com.project.mybasketballforum.service.CommentService;
@@ -175,5 +172,14 @@ class MyBasketballForumApplicationTests {
         List<Post> postList = postMapper.selectList(null);
         postcardServiceimpl.postToPostcard(postList);
     }
+
+    //测试返回文章详情
+    @Test
+    void getPostDetail() {
+        Integer postId = 1;
+        PostViewDto post = postServiceimpl.getPostViewById(postId);
+        System.out.println(post);
+    }
+
 
 }

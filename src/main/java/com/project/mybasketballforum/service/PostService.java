@@ -2,6 +2,7 @@ package com.project.mybasketballforum.service;
 
 import com.project.mybasketballforum.dto.PostCardDto;
 import com.project.mybasketballforum.dto.PostCardListDto;
+import com.project.mybasketballforum.dto.PostViewDto;
 import com.project.mybasketballforum.pojo.Post;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -31,5 +32,8 @@ public interface PostService extends IService<Post> {
 
     //返回帖子列表
     List<PostCardListDto> getPostList();
+
+    //根据帖子id返回帖子信息
+    PostViewDto getPostViewById(Integer postId);
 
 }
