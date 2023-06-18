@@ -1,7 +1,10 @@
 package com.project.mybasketballforum.dto;
 
 import cn.hutool.core.date.DateTime;
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @author MHC
@@ -14,11 +17,19 @@ import lombok.Data;
 @Data
 public class PostCardDto {
     private Integer id;
+
     private String title;
+
     private String description;
+
     private String userName;
+
     private String categoryName;
+
     private Integer viewCount;
+
     private Integer likeCount;
-    private DateTime createTime;
+
+    @JSONField(format = "yyyy-MM-dd")
+    private Date createTime;
 }

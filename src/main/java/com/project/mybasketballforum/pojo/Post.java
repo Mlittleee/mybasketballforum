@@ -1,9 +1,11 @@
 package com.project.mybasketballforum.pojo;
 
 import cn.hutool.core.date.DateTime;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -70,5 +72,6 @@ public class Post implements Serializable {
     /**
      * 帖子的创建时间
      */
-    private DateTime createTime;
+    @JSONField(format = "yyyy-MM-dd")
+    private Date createTime;
 }

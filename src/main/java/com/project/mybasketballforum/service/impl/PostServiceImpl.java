@@ -72,6 +72,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         postCardDto.setUserName(userServiceimpl.selectUserById(post.getUserId()));
         postCardDto.setLikeCount(post.getLikeCount());
         postCardDto.setViewCount(post.getViewCount());
+        postCardDto.setCategoryName(post.getCategoryName());
         return postCardDto;
     }
 }
