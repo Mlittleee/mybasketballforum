@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.project.mybasketballforum.dto.TagDto;
 import com.project.mybasketballforum.pojo.User;
 import com.project.mybasketballforum.service.TagService;
 import com.project.mybasketballforum.service.impl.TagServiceImpl;
@@ -78,7 +79,7 @@ public class TagController {
         if (result.getRecords().size() > 0) {
             return Result.success(result.getRecords(), total);
         } else {
-            return Result.error("没有查询到用户");
+            return Result.error("没有查询到标签");
         }
     }
 
@@ -135,6 +136,17 @@ public class TagController {
             tagServiceImpl.deleteTag(tagId);
         }
         return Result.success("批量删除标签成功");
+    }
+
+    //根据postId获取标签
+    @GetMapping("/getTagsByPostId")
+    public Result<List<TagDto>> getTagsByPostId(@RequestParam("postId") Integer postId){
+        List<TagDto> tagList = tagServiceImpl.getTagsByPostId(postId);
+        if (tagList.size()>0){
+            return Result.success(tagList);
+        }else {
+            return Result.error("没有查询到标签");
+        }
     }
 }
 

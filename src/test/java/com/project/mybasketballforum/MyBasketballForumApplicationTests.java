@@ -1,13 +1,11 @@
 package com.project.mybasketballforum;
 
 import com.project.mybasketballforum.dto.CategoryDto;
+import com.project.mybasketballforum.dto.TagDto;
 import com.project.mybasketballforum.pojo.*;
 import com.project.mybasketballforum.service.CommentService;
 import com.project.mybasketballforum.service.UserService;
-import com.project.mybasketballforum.service.impl.CategoryServiceImpl;
-import com.project.mybasketballforum.service.impl.CommentServiceImpl;
-import com.project.mybasketballforum.service.impl.PostServiceImpl;
-import com.project.mybasketballforum.service.impl.TipServiceImpl;
+import com.project.mybasketballforum.service.impl.*;
 import com.project.mybasketballforum.universal.QueryPageParam;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +31,9 @@ class MyBasketballForumApplicationTests {
 
     @Autowired
     private TipServiceImpl tipServiceimpl;
+
+    @Autowired
+    private TagServiceImpl tagServiceimpl;
 
     @Test
     void contextLoads() {
@@ -109,7 +110,7 @@ class MyBasketballForumApplicationTests {
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
-        post.setCategoryId(categoryId);
+        //post.setCategoryName(categoryName);
         post.setUserId(userId);
         boolean success = postServiceimpl.addPost(post);
         System.out.println(success);
@@ -120,5 +121,15 @@ class MyBasketballForumApplicationTests {
     void selectLastPost(){
         Integer id = postServiceimpl.selectLastPostId();
         System.out.println(id);
+    }
+
+    //更具postId查找标签
+    @Test
+    void getTagsByPostId() {
+        Integer postId = 1;
+        List<TagDto> tagList = tagServiceimpl.getTagsByPostId(postId);
+        for (TagDto tag : tagList) {
+            System.out.println(tag);
+        }
     }
 }

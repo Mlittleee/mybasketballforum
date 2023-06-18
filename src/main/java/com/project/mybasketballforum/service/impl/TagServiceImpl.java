@@ -1,5 +1,7 @@
 package com.project.mybasketballforum.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.project.mybasketballforum.dto.TagDto;
 import com.project.mybasketballforum.pojo.Tag;
 import com.project.mybasketballforum.mapper.TagMapper;
 import com.project.mybasketballforum.service.TagService;
@@ -65,5 +67,24 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
             }
         }
         return true;
+    }
+
+    //根据postId来获取标签
+    @Override
+    public List<TagDto> getTagsByPostId(Integer postId) {
+        LambdaQueryWrapper<Tag> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Tag::getPostId,postId);
+        if (tagMapper.selectList(wrapper).size()>0){
+            List<Tag> tagList = tagMapper.selectList(wrapper);
+            List<TagDto> tagDtoList = new ArrayList<>();
+            for (Tag tag : tagList) {
+                TagDto tagDto = new TagDto();
+                tagDto.setName(tag.getName());
+                tagDtoList.add(tagDto);
+            }
+            return tagDtoList;
+        }else {
+            return null;
+        }
     }
 }

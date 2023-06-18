@@ -1,5 +1,6 @@
 package com.project.mybasketballforum.pojo;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
@@ -66,5 +67,8 @@ public class Post implements Serializable {
      */
     private Integer userId;
 
-
+    /**
+     * 帖子的创建时间
+     */
+    private DateTime createTime;
 }

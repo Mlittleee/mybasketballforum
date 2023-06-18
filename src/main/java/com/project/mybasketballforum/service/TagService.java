@@ -1,5 +1,6 @@
 package com.project.mybasketballforum.service;
 
+import com.project.mybasketballforum.dto.TagDto;
 import com.project.mybasketballforum.pojo.Tag;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -32,5 +33,8 @@ public interface TagService extends IService<Tag> {
 
     //批量新建标签
     boolean addTags(List<Tag> tagList) throws Exception;
+
+    //根据postId获取标签
+    List<TagDto> getTagsByPostId(Integer postId);
 
 }

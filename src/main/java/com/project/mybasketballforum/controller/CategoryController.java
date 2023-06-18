@@ -3,7 +3,6 @@ package com.project.mybasketballforum.controller;
 
 import com.project.mybasketballforum.dto.CategoryDto;
 import com.project.mybasketballforum.pojo.Category;
-import com.project.mybasketballforum.service.CategoryService;
 import com.project.mybasketballforum.service.impl.CategoryServiceImpl;
 import com.project.mybasketballforum.universal.Result;
 import org.springframework.beans.factory.annotation.Autowired;
