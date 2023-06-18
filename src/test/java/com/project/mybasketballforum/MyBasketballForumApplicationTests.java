@@ -1,7 +1,9 @@
 package com.project.mybasketballforum;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.project.mybasketballforum.dto.CategoryDto;
 import com.project.mybasketballforum.dto.PostCardDto;
+import com.project.mybasketballforum.dto.PostCardListDto;
 import com.project.mybasketballforum.dto.TagDto;
 import com.project.mybasketballforum.pojo.*;
 import com.project.mybasketballforum.service.CommentService;
@@ -139,5 +141,24 @@ class MyBasketballForumApplicationTests {
     void getPostCard(){
         PostCardDto post = postServiceimpl.getOnePost();
         System.out.println(post);
+    }
+
+    //测试返回帖子列表
+    @Test
+    void getPostList(){
+        List<PostCardListDto> list = postServiceimpl.getPostList();
+        for (PostCardListDto postCardDto : list) {
+            System.out.println(postCardDto);
+        }
+    }
+
+    @Test
+    void getPostListByCategoryId() {
+        LambdaQueryWrapper<Post> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Post::getTitle, null);
+        List<Post> list = postServiceimpl.list(wrapper);
+        if (list.isEmpty()) {
+            System.out.println("null");
+        }
     }
 }

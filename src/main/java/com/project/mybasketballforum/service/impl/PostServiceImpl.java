@@ -3,12 +3,17 @@ package com.project.mybasketballforum.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.project.mybasketballforum.dto.PostCardDto;
+import com.project.mybasketballforum.dto.PostCardListDto;
+import com.project.mybasketballforum.dto.TagDto;
 import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.mapper.PostMapper;
 import com.project.mybasketballforum.service.PostService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -23,6 +28,9 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
 
     @Autowired
     private UserServiceImpl userServiceimpl;
+
+    @Autowired
+    private TagServiceImpl tagServiceimpl;
 
     //发布（新增）帖子
     @Override
@@ -74,5 +82,28 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         postCardDto.setViewCount(post.getViewCount());
         postCardDto.setCategoryName(post.getCategoryName());
         return postCardDto;
+    }
+
+    //返回所有帖子列表
+    @Override
+    public List<PostCardListDto> getPostList() {
+        //取出所有帖子
+        List<Post> postList = this.baseMapper.selectList(null);
+        //将帖子信息封装到PostCardListDto中
+        List<PostCardListDto> postCardListDtoList = new ArrayList<>();
+        for(Post post : postList){
+            PostCardListDto postCardListDto = new PostCardListDto();
+            postCardListDto.setId(post.getPostId());
+            postCardListDto.setTitle(post.getTitle());
+            postCardListDto.setDescription(post.getDescription());
+            postCardListDto.setCreateTime(post.getCreateTime());
+            postCardListDto.setUserName(userServiceimpl.selectUserById(post.getUserId()));
+            postCardListDto.setLikeCount(post.getLikeCount());
+            postCardListDto.setViewCount(post.getViewCount());
+            postCardListDto.setCategoryName(post.getCategoryName());
+            postCardListDto.setTagDtoList(tagServiceimpl.getTagsByPostId(post.getPostId()));
+            postCardListDtoList.add(postCardListDto);
+        }
+        return postCardListDtoList;
     }
 }

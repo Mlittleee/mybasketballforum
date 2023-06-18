@@ -1,12 +1,23 @@
 package com.project.mybasketballforum.controller;
 
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
 import com.project.mybasketballforum.dto.PostCardDto;
+import com.project.mybasketballforum.dto.PostCardListDto;
 import com.project.mybasketballforum.pojo.Post;
+import com.project.mybasketballforum.pojo.User;
 import com.project.mybasketballforum.service.impl.PostServiceImpl;
+import com.project.mybasketballforum.universal.QueryPageParam;
 import com.project.mybasketballforum.universal.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -66,5 +77,14 @@ public class PostController {
             return Result.error("没有查询到该帖子");
         }
     }
+
+    //返回帖子列表，不进行标题的查询，查询后面在进行时实现
+    /*@GetMapping("/getPostListPage")
+    public Result<List<PostCardListDto>> getPostList(@RequestBody QueryPageParam query) {
+        //使用pageHelper进行分页
+        PageHelper.startPage(query.getPageNum(), query.getPageSize());
+        List<PostCardListDto> postcardlist = postServiceimpl.getPostList();
+
+    }*/
 
 }

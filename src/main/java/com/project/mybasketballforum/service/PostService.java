@@ -1,8 +1,11 @@
 package com.project.mybasketballforum.service;
 
 import com.project.mybasketballforum.dto.PostCardDto;
+import com.project.mybasketballforum.dto.PostCardListDto;
 import com.project.mybasketballforum.pojo.Post;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -25,5 +28,8 @@ public interface PostService extends IService<Post> {
 
     //返回一条帖子的信息（测试用）
     PostCardDto getOnePost();
+
+    //返回帖子列表
+    List<PostCardListDto> getPostList();
 
 }
