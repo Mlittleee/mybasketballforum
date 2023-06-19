@@ -35,6 +35,9 @@ class MyBasketballForumApplicationTests {
     private TipServiceImpl tipServiceimpl;
 
     @Autowired
+    private CategoryServiceImpl categoryServiceImpl;
+
+    @Autowired
     private TagServiceImpl tagServiceimpl;
 
     @Autowired
@@ -182,6 +185,7 @@ class MyBasketballForumApplicationTests {
         System.out.println(post);
     }
 
+    //测试浏览量的增加
     @Test
     void updateViewCountTest() {
         Integer postId = 1; // 假设要更新的帖子ID为1
@@ -196,4 +200,20 @@ class MyBasketballForumApplicationTests {
         }
     }
 
+
+    //测试按板块名的查询
+    @Test
+    void getCategoryListPageTest() {
+        QueryPageParam query = new QueryPageParam();
+        query.setPageNum(1);
+        query.setPageSize(10);
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("categoryName", "BA");
+        query.setParam(param);
+
+        List<Category> categoryList = categoryServiceImpl.getCategoryListPage(query);
+        for (Category category : categoryList) {
+            System.out.println(category);
+        }
+    }
 }

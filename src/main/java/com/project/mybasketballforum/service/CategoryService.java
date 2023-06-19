@@ -1,8 +1,10 @@
 package com.project.mybasketballforum.service;
 
 import com.project.mybasketballforum.dto.CategoryDto;
+import com.project.mybasketballforum.dto.PostCardListDto;
 import com.project.mybasketballforum.pojo.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.project.mybasketballforum.universal.QueryPageParam;
 
 import java.util.List;
 
@@ -28,5 +30,7 @@ public interface CategoryService extends IService<Category> {
     //查询所有分类
     List<CategoryDto> selectAllCategory();
 
+    //按板块名查询分
+    List<Category> getCategoryListPage(QueryPageParam query);
 
 }
