@@ -43,7 +43,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         queryWrapper.eq(Post::getTitle,Title);
         Post post1 = this.baseMapper.selectOne(queryWrapper);
         if(post1 != null){
-            return false;
+            throw new RuntimeException("帖子已存在");
         }else{
             return this.save(post);
         }

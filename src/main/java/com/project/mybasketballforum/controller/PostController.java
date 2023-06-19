@@ -57,11 +57,11 @@ public class PostController {
     @PostMapping("/addPost")
     public Result<String> addPost(@RequestBody Post post) {
         if (postServiceimpl.addPost(post)) {
-            return Result.success("发布帖子成功");
-        } else {
-            return Result.error("发布帖子失败");
+                return Result.success("发布帖子成功");
+            } else {
+                return Result.error("存在同名帖子，请重新添加");
+            }
         }
-    }
 
     //根据帖子标题查询帖子
     @GetMapping("/selectPostByTitle")
