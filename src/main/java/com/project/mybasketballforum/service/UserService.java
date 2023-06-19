@@ -21,4 +21,5 @@ public interface UserService extends IService<User> {
 
     //根据id查询用户名称
     String selectUserById(Integer id);
+
 }

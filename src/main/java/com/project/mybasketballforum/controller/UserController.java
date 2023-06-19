@@ -161,4 +161,15 @@ public class UserController {
             return Result.error("没有查询到用户");
         }
     }
+
+    //根据id查询用户
+    @GetMapping("/getUserById")
+    public Result<User> getUserById(@RequestParam Integer id){
+        User user = iuserService.getById(id);
+        if (user!=null){
+            return Result.success(user);
+        }else {
+            return Result.error("没有查询到用户");
+        }
+    }
 }
