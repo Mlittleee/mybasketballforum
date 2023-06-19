@@ -65,6 +65,21 @@ public class PostcardServiceImpl extends ServiceImpl<PostcardMapper, Postcard> i
             //将postcard存入数据库
             this.save(postcard);
         }
+    }
 
+    //添加浏览量
+    @Override
+    public boolean addViewCount(Integer postId) {
+        Postcard postcard = this.getById(postId);
+        postcard.setViewCount(postcard.getViewCount()+1);
+        return(this.updateById(postcard));
+    }
+
+    //添加点赞量
+    @Override
+    public boolean addLikeCount(Integer postId) {
+        Postcard postcard = this.getById(postId);
+        postcard.setLikeCount(postcard.getLikeCount()+1);
+        return(this.updateById(postcard));
     }
 }
