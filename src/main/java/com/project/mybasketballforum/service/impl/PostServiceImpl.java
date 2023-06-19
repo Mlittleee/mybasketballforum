@@ -10,6 +10,7 @@ import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.mapper.PostMapper;
 import com.project.mybasketballforum.service.PostService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -120,4 +121,13 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         postViewDto.setCategoryName(post.getCategoryName());
         return postViewDto;
     }
+
+    @Override
+    public boolean updateViewCount(Integer postId) {
+        Post post = this.baseMapper.selectById(postId);
+        //根据前端请求详情的id增加浏览量
+        post.setViewCount(post.getViewCount()+1);
+        return updateById(post);
+    }
+
 }

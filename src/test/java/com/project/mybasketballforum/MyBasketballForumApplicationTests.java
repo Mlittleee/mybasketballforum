@@ -8,6 +8,7 @@ import com.project.mybasketballforum.service.CommentService;
 import com.project.mybasketballforum.service.UserService;
 import com.project.mybasketballforum.service.impl.*;
 import com.project.mybasketballforum.universal.QueryPageParam;
+import com.project.mybasketballforum.universal.Result;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -181,5 +182,18 @@ class MyBasketballForumApplicationTests {
         System.out.println(post);
     }
 
+    @Test
+    void updateViewCountTest() {
+        Integer postId = 1; // 假设要更新的帖子ID为1
+
+        // 调用更新浏览量的方法
+        boolean success = postServiceimpl.updateViewCount(postId);
+
+        if (success) {
+            System.out.println("帖子浏览量更新成功");
+        } else {
+            System.out.println("帖子浏览量更新失败");
+        }
+    }
 
 }

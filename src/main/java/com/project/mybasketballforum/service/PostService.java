@@ -36,4 +36,7 @@ public interface PostService extends IService<Post> {
     //根据帖子id返回帖子信息
     PostViewDto getPostViewById(Integer postId);
 
+    //根据帖子id增加帖子浏览量
+    boolean updateViewCount(Integer postId);
+
 }
