@@ -48,7 +48,7 @@ public class CommentController {
     }
 
     @PostMapping("/deleteComments")
-    public Result<String> deleteComments(@RequestBody List<Integer> commentIds) {
+    public Result<String> deleteComments(String commentIds) {
         //传入批量删除的评论的id数组来完成删除
         if (commentService.deleteComments(commentIds)) {
             return Result.success("评论批量删除成功");

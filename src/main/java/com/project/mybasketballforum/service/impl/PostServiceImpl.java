@@ -10,7 +10,6 @@ import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.mapper.PostMapper;
 import com.project.mybasketballforum.service.PostService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

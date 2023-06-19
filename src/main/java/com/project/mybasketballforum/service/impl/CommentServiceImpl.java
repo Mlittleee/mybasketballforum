@@ -39,9 +39,15 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     @Override
-    public boolean deleteComments(List<Integer> commentIds) {
-        // 调用MyBatis-Plus的removeByIds方法批量删除评论
-        return this.removeByIds(commentIds);
+    public boolean deleteComments(String commentIds) {
+        String[] ids = commentIds.split(",");
+        for (String id : ids) {
+            Integer commentId = Integer.parseInt(id);
+            boolean flag = removeById(commentId);
+            if (!flag) {
+                return false;
+            }
+        }
+        return true;
     }
-
 }

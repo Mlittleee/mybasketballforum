@@ -38,6 +38,6 @@ public interface CommentService extends IService<Comment> {
      * @param commentIds 评论id列表（数组）
      * @return 是否批量删除成功
      */
-    boolean deleteComments(List<Integer> commentIds);
+    boolean deleteComments(String commentIds);
 
 }
