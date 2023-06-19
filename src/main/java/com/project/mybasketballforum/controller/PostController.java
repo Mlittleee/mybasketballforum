@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.project.mybasketballforum.dto.PostCardDto;
 import com.project.mybasketballforum.dto.PostCardListDto;
 import com.project.mybasketballforum.dto.PostViewDto;
+import com.project.mybasketballforum.mapper.PostMapper;
 import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.pojo.Postcard;
 import com.project.mybasketballforum.pojo.User;
@@ -48,6 +49,9 @@ public class PostController {
 
     @Autowired
     private PostcardService ipostcardService;
+
+    @Autowired
+    private PostMapper postMapper;
 
     //发布（新增）帖子
     @PostMapping("/addPost")
@@ -135,14 +139,13 @@ public class PostController {
             return Result.error("没有查询到该帖子");
         }
     }
-    // 根据帖子id增加浏览量
-    @GetMapping("/updateViewCount")
-    public Result<String> updateViewCount(@RequestParam Integer postId) {
-        boolean success = postServiceimpl.updateViewCount(postId);
-        if (success) {
-            return Result.success("增加浏览量成功");
-        } else {
-            return Result.error("增加浏览量失败");
-        }
+
+    //刷新帖子列表方法
+    @GetMapping("/refreshPostList")
+    public Result<String> refreshPostList() {
+        //查询所有帖子
+        List<Post> postList = postMapper.selectList(null);
+        postcardServiceimpl.postToPostcard(postList);
+           return Result.success("刷新成功");
     }
 }

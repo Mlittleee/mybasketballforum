@@ -75,6 +75,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             userDto.setGender(user.getGender());
             userDto.setStatus(user.getStatus());
             userDto.setRoleId(user.getRoleId());
+            userDto.setSign(user.getSign());
 
             //System.out.println(userDto);
 
@@ -114,6 +115,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 userDto.setPassword(user.getPassword());
                 userDto.setStatus(user.getStatus());
                 userDto.setRoleId(user.getRoleId());
+                userDto.setSign(user.getSign());
                 Map<String, Object> userMap = BeanUtil.beanToMap(userDto, new HashMap<>(),
                         CopyOptions.create()
                                 .setIgnoreNullValue(true)

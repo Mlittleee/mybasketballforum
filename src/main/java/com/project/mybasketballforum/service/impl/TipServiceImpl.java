@@ -30,7 +30,6 @@ public class TipServiceImpl extends ServiceImpl<TipMapper, Tip> implements TipSe
         //根据数据库中记录数生成随机数
         int random = (int) (Math.random() * count + 1);
         //根据随机数来获取每日一句
-        Tip tip = tipMapper.selectById(random);
-        return tip;
+        return tipMapper.selectById(random);
     }
 }

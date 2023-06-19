@@ -101,16 +101,16 @@ public class UserController {
     }
 
     //用户查询(模糊查询)
-    @PostMapping("/query")
-    public Result<List<User>> queryUser(@RequestBody String UserName){
+    @GetMapping("/query")
+    public Result<List<User>> queryUser(@RequestParam String UserName){
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.like(User::getUserName,UserName);
         List<User> UserList= iuserService.list(wrapper);
-        //if (UserList.size()>0){
+        if (UserList.size()>0){
             return Result.success(UserList);
-        /*}else {
+        }else {
             return Result.error("没有查询到用户");
-        }*/
+        }
     }
 
     //列出所有用户
