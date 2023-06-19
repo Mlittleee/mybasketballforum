@@ -3,10 +3,7 @@ package com.project.mybasketballforum.controller;
 import com.project.mybasketballforum.service.impl.PostcardServiceImpl;
 import com.project.mybasketballforum.universal.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author MHC
@@ -26,7 +23,7 @@ public class PostcardController {
 
     //添加浏览量
     @GetMapping("/addViewCount")
-    public Result<String> addViewCount(Integer postId){
+    public Result<String> addViewCount(@RequestParam Integer postId){
         if(postcardServiceimpl.addViewCount(postId)){
             return Result.success("添加成功");
         }
@@ -35,7 +32,7 @@ public class PostcardController {
 
     //添加点赞量
     @GetMapping("/addLikeCount")
-    public Result<String> addLikeCount(Integer postId){
+    public Result<String> addLikeCount(@RequestParam Integer postId){
         if(postcardServiceimpl.addLikeCount(postId)){
             return Result.success("添加成功");
         }
