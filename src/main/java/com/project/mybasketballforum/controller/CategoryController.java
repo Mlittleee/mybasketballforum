@@ -1,14 +1,21 @@
 package com.project.mybasketballforum.controller;
 
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.project.mybasketballforum.dto.CategoryDto;
 import com.project.mybasketballforum.pojo.Category;
 import com.project.mybasketballforum.service.impl.CategoryServiceImpl;
+import com.project.mybasketballforum.universal.QueryPageParam;
 import com.project.mybasketballforum.universal.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -64,6 +71,17 @@ public class CategoryController {
             return Result.success(categoryServiceimpl.selectAllCategory());
         } else {
             return Result.error("查询所有分类失败");
+        }
+    }
+
+    // 按板块名查询
+    @PostMapping("/getCategoryListPage")
+    public Result<List<Category>> getCategoryListPage(@RequestBody QueryPageParam query) {
+        List<Category> categoryList = categoryServiceimpl.getCategoryListPage(query);
+        if (categoryList != null) {
+            return Result.success(categoryList);
+        } else {
+            return Result.error("没有查询到该分类");
         }
     }
 

@@ -1,13 +1,21 @@
 package com.project.mybasketballforum.service.impl;
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.project.mybasketballforum.dto.CategoryDto;
+import com.project.mybasketballforum.mapper.CommentMapper;
 import com.project.mybasketballforum.pojo.Category;
 import com.project.mybasketballforum.mapper.CategoryMapper;
 import com.project.mybasketballforum.service.CategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.project.mybasketballforum.universal.QueryPageParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,6 +28,9 @@ import java.util.List;
  */
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
+
+    @Autowired
+    private CategoryMapper categoryMapper;
 
     // 管理员新增板块
     @Override
@@ -54,6 +65,26 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
             categoryDtoList.add(categoryDto);
         }
         return categoryDtoList;
+    }
+
+    //按板块名查询
+    @Override
+    public List<Category> getCategoryListPage(QueryPageParam query) {
+        HashMap<String, Object> param = query.getParam();
+        Page<Category> categoryPage = new Page<>();
+        categoryPage.setCurrent(query.getPageNum());
+        categoryPage.setSize(query.getPageSize());
+
+        LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
+        if (param != null) {
+            String categoryName = (String) param.get("categoryName");
+            if (StrUtil.isNotBlank(categoryName) && !categoryName.equals("null")) {
+                wrapper.like(Category::getCategoryName, categoryName);
+            }
+        }
+
+        IPage<Category> result = categoryMapper.selectPage(categoryPage, wrapper);
+        return result.getRecords();
     }
 
 }
