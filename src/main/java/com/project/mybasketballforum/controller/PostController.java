@@ -148,4 +148,15 @@ public class PostController {
         postcardServiceimpl.postToPostcard(postList);
            return Result.success("刷新成功");
     }
+
+    //更新帖子浏览量
+    @GetMapping("/updateViewCount")
+    public Result<String> updateViewCount(@RequestParam Integer postId) {
+        boolean success = postServiceimpl.updateViewCount(postId);
+        if (success) {
+            return Result.success("增加浏览量成功");
+        } else {
+            return Result.error("增加浏览量失败");
+        }
+    }
 }
