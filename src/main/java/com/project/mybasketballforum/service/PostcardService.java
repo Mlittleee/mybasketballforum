@@ -18,4 +18,10 @@ public interface PostcardService extends IService<Postcard> {
 
     //将List<post>转换为List<postcard>
     void postToPostcard(List<Post> postList);
+
+    //添加浏览量
+    boolean addViewCount(Integer postId);
+
+    //添加点赞量
+    boolean addLikeCount(Integer postId);
 }
