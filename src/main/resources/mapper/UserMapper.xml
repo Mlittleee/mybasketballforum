@@ -12,6 +12,7 @@
             <result property="email" column="email" />
             <result property="gender" column="gender" />
             <result property="roleId" column="role_id" />
+            <result property="sign" column="sign" />
     </resultMap>
 
     <select id="listAll" resultType="com.project.mybasketballforum.pojo.User">
@@ -22,7 +23,8 @@
             status,
             gender,
             role_id,
-            email
+            email,
+            sign
         from user
     </select>
 

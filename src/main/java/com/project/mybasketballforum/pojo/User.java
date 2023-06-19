@@ -37,5 +37,6 @@ public class User implements Serializable {
 
     private Integer roleId;
 
+    private String sign;
 
 }
