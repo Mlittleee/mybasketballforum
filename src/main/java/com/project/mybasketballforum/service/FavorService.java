@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface FavorService extends IService<Favor> {
 
+    //增加收藏帖子功能
+    boolean addFavor(Integer userId,Integer postId);
 }

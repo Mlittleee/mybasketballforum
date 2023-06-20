@@ -41,6 +41,9 @@ class MyBasketballForumApplicationTests {
     private TagServiceImpl tagServiceimpl;
 
     @Autowired
+    private FavorServiceImpl favorServiceimpl;
+
+    @Autowired
     private PostMapper postMapper;
 
     @Autowired
@@ -214,6 +217,19 @@ class MyBasketballForumApplicationTests {
         List<Category> categoryList = categoryServiceImpl.getCategoryListPage(query);
         for (Category category : categoryList) {
             System.out.println(category);
+        }
+    }
+
+    @Test
+    void addFavorTest(){
+        Integer userId = 3;
+        Integer postId = 2;
+
+        boolean success = favorServiceimpl.addFavor(userId, postId); // 调用实例方法
+        if (success) {
+            System.out.println("添加收藏成功.");
+        } else {
+            System.out.println("收藏添加失败.");
         }
     }
 }
