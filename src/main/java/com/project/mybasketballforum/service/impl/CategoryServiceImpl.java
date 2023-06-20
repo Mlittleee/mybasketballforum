@@ -87,4 +87,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         return result.getRecords();
     }
 
+    //按板块名查询
+    @Override
+    public String getCategoryDescription(String categoryName) {
+        LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Category::getCategoryName, categoryName);
+        Category category = categoryMapper.selectOne(wrapper);
+        return category.getDescription();
+    }
+
 }

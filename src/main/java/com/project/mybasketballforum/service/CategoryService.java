@@ -30,7 +30,7 @@ public interface CategoryService extends IService<Category> {
     //查询所有分类
     List<CategoryDto> selectAllCategory();
 
-    //按板块名查询分
-    List<Category> getCategoryListPage(QueryPageParam query);
+    //按板块名查询板块的简介
+    String getCategoryDescription(String categoryName);
 
 }
