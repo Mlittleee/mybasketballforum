@@ -69,22 +69,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     //按板块名查询
     @Override
-    public List<Category> getCategoryListPage(QueryPageParam query) {
-        HashMap<String, Object> param = query.getParam();
-        Page<Category> categoryPage = new Page<>();
-        categoryPage.setCurrent(query.getPageNum());
-        categoryPage.setSize(query.getPageSize());
-
+    public String getCategoryDescription(String categoryName) {
         LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
-        if (param != null) {
-            String categoryName = (String) param.get("categoryName");
-            if (StrUtil.isNotBlank(categoryName) && !categoryName.equals("null")) {
-                wrapper.like(Category::getCategoryName, categoryName);
-            }
-        }
-
-        IPage<Category> result = categoryMapper.selectPage(categoryPage, wrapper);
-        return result.getRecords();
+        wrapper.eq(Category::getCategoryName, categoryName);
+        Category category = categoryMapper.selectOne(wrapper);
+        return category.getDescription();
     }
 
 }

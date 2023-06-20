@@ -205,7 +205,7 @@ class MyBasketballForumApplicationTests {
 
 
     //测试按板块名的查询
-    @Test
+    /*@Test
     void getCategoryListPageTest() {
         QueryPageParam query = new QueryPageParam();
         query.setPageNum(1);
@@ -218,7 +218,7 @@ class MyBasketballForumApplicationTests {
         for (Category category : categoryList) {
             System.out.println(category);
         }
-    }
+    }*/
 
     @Test
     void addFavorTest(){
