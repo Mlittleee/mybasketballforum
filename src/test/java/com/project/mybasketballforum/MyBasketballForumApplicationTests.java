@@ -222,14 +222,27 @@ class MyBasketballForumApplicationTests {
 
     @Test
     void addFavorTest(){
-        Integer userId = 3;
-        Integer postId = 2;
+        Integer userId = 2;
+        Integer postId = 1;
 
         boolean success = favorServiceimpl.addFavor(userId, postId); // 调用实例方法
         if (success) {
             System.out.println("添加收藏成功.");
         } else {
-            System.out.println("收藏添加失败.");
+            System.out.println("添加收藏失败.");
+        }
+    }
+
+    @Test
+    void delFavorTest(){
+        Integer userId = 2;
+        Integer postId = 2;
+
+        boolean success = favorServiceimpl.delFavor(userId, postId);
+        if (success) {
+            System.out.println("取消收藏成功.");
+        } else {
+            System.out.println("取消收藏失败.");
         }
     }
 }

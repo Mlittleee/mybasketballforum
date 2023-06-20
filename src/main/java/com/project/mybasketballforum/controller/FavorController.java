@@ -29,10 +29,19 @@ public class FavorController {
         if (favorService.addFavor(userId, postId)) {
             return Result.success("收藏成功");
         } else {
-            return Result.error("收藏失败");
+            return Result.error("已有重复收藏，收藏失败");
         }
     }
 
+    @GetMapping("/delFavor")
+    public Result<String> delFavor(Integer userId,Integer postId) {
+        //传入收藏帖子id和用户id 完成取消收藏功能
+        if (favorService.delFavor(userId, postId)) {
+            return Result.success("取消收藏成功");
+        } else {
+            return Result.error("取消收藏失败");
+        }
+    }
 
 }
 

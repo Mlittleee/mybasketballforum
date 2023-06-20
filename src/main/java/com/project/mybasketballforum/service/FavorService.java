@@ -15,4 +15,7 @@ public interface FavorService extends IService<Favor> {
 
     //增加收藏帖子功能
     boolean addFavor(Integer userId,Integer postId);
+
+    //取消收藏功能
+    boolean delFavor(Integer userId,Integer postId);
 }
