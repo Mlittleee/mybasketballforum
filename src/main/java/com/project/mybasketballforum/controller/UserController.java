@@ -173,4 +173,27 @@ public class UserController {
             return Result.error("没有查询到用户");
         }
     }
+
+    //查询用户发帖量
+    @GetMapping("/getPostCount")
+    public Result<Integer> getPostCount(Integer id){
+        Integer postCount = userServiceimpl.getPostCount(id);
+        if (postCount!=null){
+            return Result.success(postCount);
+        }else {
+            return Result.error("没有查询到发帖量");
+        }
+    }
+
+    //查询用户获赞量
+    @GetMapping("/getLikeCount")
+    public Result<Integer> getLikeCount(Integer id){
+        Integer likeCount = userServiceimpl.getLikeCount(id);
+        if (likeCount!=null){
+            return Result.success(likeCount);
+        }else {
+            return Result.error("没有查询到获赞量");
+        }
+    }
+
 }

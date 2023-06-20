@@ -8,8 +8,11 @@ import com.project.mybasketballforum.dto.UserDto;
 import com.project.mybasketballforum.exception.HaveDisabledException;
 import com.project.mybasketballforum.exception.PasswordWrongException;
 import com.project.mybasketballforum.mapper.PostMapper;
+import com.project.mybasketballforum.mapper.PostcardMapper;
 import com.project.mybasketballforum.pojo.Post;
+import com.project.mybasketballforum.pojo.Postcard;
 import com.project.mybasketballforum.pojo.User;
+import com.project.mybasketballforum.service.PostcardService;
 import com.project.mybasketballforum.service.UserService;
 import com.project.mybasketballforum.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private PostcardMapper postcardMapper;
 
     @Autowired
     private PostMapper postMapper;
@@ -167,11 +173,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     //根据userId获取用户获赞数
     public Integer getLikeCount(Integer userId){
-        LambdaQueryWrapper<Post> wrapper= new LambdaQueryWrapper<>();
-        wrapper.eq(Post::getUserId,userId);
-        List<Post> posts = postMapper.selectList(wrapper);
+        //根据userId获取获得userName
+        LambdaQueryWrapper<User> wrapper1= new LambdaQueryWrapper<>();
+        wrapper1.eq(User::getUserId,userId);
+        User user = userMapper.selectOne(wrapper1);
+        String userName = user.getUserName();
+        LambdaQueryWrapper<Postcard> wrapper= new LambdaQueryWrapper<>();
+        wrapper.eq(Postcard::getUserName,userName);
+        List<Postcard> posts = postcardMapper.selectList(wrapper);
         Integer likeCount = 0;
-        for(Post post:posts){
+        for(Postcard post:posts){
             likeCount += post.getLikeCount();
         }
         return likeCount;
