@@ -22,4 +22,10 @@ public interface UserService extends IService<User> {
     //根据id查询用户名称
     String selectUserById(Integer id);
 
+    //根据userId查询发帖量
+    Integer getPostCount(Integer userId);
+
+    //根据userId查询获赞量
+    Integer getLikeCount(Integer userId);
+
 }

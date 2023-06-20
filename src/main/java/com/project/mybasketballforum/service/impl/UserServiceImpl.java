@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.project.mybasketballforum.dto.UserDto;
 import com.project.mybasketballforum.exception.HaveDisabledException;
 import com.project.mybasketballforum.exception.PasswordWrongException;
+import com.project.mybasketballforum.mapper.PostMapper;
+import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.pojo.User;
 import com.project.mybasketballforum.service.UserService;
 import com.project.mybasketballforum.mapper.UserMapper;
@@ -33,6 +35,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private PostMapper postMapper;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -151,6 +156,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public String selectUserById(Integer userId){
         User user = userMapper.selectById(userId);
         return user.getUserName();
+    }
+
+    //根据userId获取用户发帖量
+    public Integer getPostCount(Integer userId){
+        LambdaQueryWrapper<Post> wrapper= new LambdaQueryWrapper<>();
+        wrapper.eq(Post::getUserId,userId);
+        return Math.toIntExact(postMapper.selectCount(wrapper));
+    }
+
+    //根据userId获取用户获赞数
+    public Integer getLikeCount(Integer userId){
+        LambdaQueryWrapper<Post> wrapper= new LambdaQueryWrapper<>();
+        wrapper.eq(Post::getUserId,userId);
+        List<Post> posts = postMapper.selectList(wrapper);
+        Integer likeCount = 0;
+        for(Post post:posts){
+            likeCount += post.getLikeCount();
+        }
+        return likeCount;
     }
 
 }
