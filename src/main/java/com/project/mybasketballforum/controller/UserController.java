@@ -77,6 +77,16 @@ public class UserController {
         }
     }
 
+    //在个人中心处的个人简介的个人信息修改
+    @GetMapping("/updateUserInfo")
+    public Result<String> updateUserInfo(@RequestParam Integer userId, @RequestParam String userName, @RequestParam String sign,
+                                         @RequestParam Integer gender, @RequestParam String email){
+        if(userServiceimpl.updateUserInfo(userId, userName, sign, gender, email)){
+            return Result.success("修改成功");
+        }
+        return Result.error("修改失败");
+    }
+
     //用户新增或者修改
     @PostMapping("/addOrUpdate")
     public Result<User> addUserOrUpdateUser(@RequestBody User user){

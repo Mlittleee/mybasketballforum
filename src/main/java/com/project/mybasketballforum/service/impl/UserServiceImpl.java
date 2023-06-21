@@ -188,6 +188,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return likeCount;
     }
 
+    //在个人中心处的个人简介的个人信息修改
+    @Override
+    public Boolean updateUserInfo(Integer userID, String userName, String sign, Integer gender, String email) {
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(User::getUserId,userID);
+        User user = userMapper.selectOne(wrapper);
+        user.setUserName(userName);
+        user.setSign(sign);
+        user.setGender(gender);
+        user.setEmail(email);
+        //将修改后的信息存入数据库
+        int result = userMapper.updateById(user);
+        return result == 1;
+    }
 }
 
 
