@@ -19,6 +19,9 @@ public interface UserService extends IService<User> {
 
     List<User> listAll();
 
+    //在个人中心处的个人简介的个人信息修改
+    Boolean updateUserInfo(Integer userId, String userName, String sign, Integer gender, String email);
+
     //根据id查询用户名称
     String selectUserById(Integer id);
 
