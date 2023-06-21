@@ -107,6 +107,14 @@ public class CategoryController {
         }
     }
 
+    @GetMapping("/getCategoryDescription")
+    public Result<String> getCategoryDescription(@RequestParam String categoryName) {
+        if (categoryServiceimpl.getCategoryDescription(categoryName) != null) {
+            return Result.success(categoryServiceimpl.getCategoryDescription(categoryName));
+        } else {
+            return Result.error("查询板块简介失败");
+        }
+    }
     //按板块名查询简介
     @GetMapping("/getCategoryInfo")
     public Result<CategoryInfoDto> getCategoryInfo(@RequestParam String categoryName) {

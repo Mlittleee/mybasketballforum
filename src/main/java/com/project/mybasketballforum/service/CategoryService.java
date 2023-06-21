@@ -31,6 +31,9 @@ public interface CategoryService extends IService<Category> {
     //查询所有分类
     List<CategoryDto> selectAllCategory();
 
+    //按板块名查询板块的简介
+    String getCategoryDescription(String categoryName);
+
     //按板块名查询板块内容
     CategoryInfoDto getCategoryInfo(String categoryName);
 
