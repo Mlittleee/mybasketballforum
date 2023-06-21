@@ -17,10 +17,7 @@ import com.project.mybasketballforum.universal.QueryPageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -81,7 +78,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     }
 
     //按板块名查询帖子描述
-    //按板块名查询
     @Override
     public String getCategoryDescription(String categoryName) {
         LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
@@ -89,5 +85,28 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         Category category = categoryMapper.selectOne(wrapper);
         return category.getDescription();
     }
+
+    @Override
+    public Integer getCategoryHeatOrder(String categoryName) {
+        List<String> fixedCategories = Arrays.asList("NBA", "CBA", "CUBA", "野球帝");
+        //实现根据发帖数来对各板块排序
+        fixedCategories.sort(Comparator.comparingInt(category -> getPostCount(category)));
+        System.out.println(fixedCategories);
+        //返回热度值
+        for (int i = 0; i < fixedCategories.size(); i++) {
+            if (fixedCategories.get(i).equals(categoryName)) {
+                return i + 2;
+            }
+        }
+        return 0;
+    }
+
+    //得到发帖数（HeatOrder调用的方法）
+    private int getPostCount(Object categoryName) {
+        LambdaQueryWrapper<Post> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Post::getCategoryName, categoryName);
+        return Math.toIntExact(postMapper.selectCount(wrapper));
+    }
+
 
 }
