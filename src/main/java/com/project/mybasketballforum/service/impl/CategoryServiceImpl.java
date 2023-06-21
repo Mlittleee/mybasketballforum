@@ -1,26 +1,18 @@
 package com.project.mybasketballforum.service.impl;
 
-import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.project.mybasketballforum.dto.CategoryDto;
 import com.project.mybasketballforum.dto.CategoryInfoDto;
-import com.project.mybasketballforum.mapper.CommentMapper;
 import com.project.mybasketballforum.mapper.PostMapper;
 import com.project.mybasketballforum.pojo.Category;
 import com.project.mybasketballforum.mapper.CategoryMapper;
 import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.service.CategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.project.mybasketballforum.universal.QueryPageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -79,4 +71,27 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     public CategoryInfoDto getCategoryInfo(String categoryName) {
         return categoryMapper.getCategoryInfo(categoryName);
     }
+
+    @Override
+    public Integer getCategoryHeatOrder(String categoryName) {
+        List<String> fixedCategories = Arrays.asList("NBA", "CBA", "CUBA", "野球帝");
+        //实现根据发帖数来对各板块排序
+        fixedCategories.sort(Comparator.comparingInt(category -> getPostCount(category)).reversed());
+
+        //返回热度值
+        for (int i = 0; i < fixedCategories.size(); i++) {
+            if (fixedCategories.get(i).equals(categoryName)) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
+
+    //得到发帖数
+    private int getPostCount(Object categoryName) {
+        LambdaQueryWrapper<Post> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Post::getCategoryName, categoryName);
+        return Math.toIntExact(postMapper.selectCount(wrapper));
+    }
+
 }
