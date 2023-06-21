@@ -34,6 +34,7 @@ public class ThumbServiceImpl extends ServiceImpl<ThumbMapper, Thumb> implements
     private PostcardMapper postcardMapper;
 
     //添加点赞功能
+    @Override
     public Boolean addLike(Integer userId, Integer postId){
         LambdaQueryWrapper<Thumb> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Thumb::getUserId,userId);
@@ -49,6 +50,7 @@ public class ThumbServiceImpl extends ServiceImpl<ThumbMapper, Thumb> implements
     }
 
    //返回所有用户点赞过的帖子
+    @Override
     public List<Postcard> listLiked(Integer userId){
         LambdaQueryWrapper<Thumb> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Thumb::getUserId,userId);
