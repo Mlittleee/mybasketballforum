@@ -116,4 +116,10 @@ public class PostcardServiceImpl extends ServiceImpl<PostcardMapper, Postcard> i
         postcard.setLikeCount(postcard.getLikeCount()+1);
         return(this.updateById(postcard));
     }
+
+    //更新帖子
+    @Override
+    public boolean updatePostcard(Postcard postcard) {
+        return(this.updateById(postcard));
+    }
 }

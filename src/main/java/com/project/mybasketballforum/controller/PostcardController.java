@@ -1,5 +1,6 @@
 package com.project.mybasketballforum.controller;
 
+import com.project.mybasketballforum.pojo.Postcard;
 import com.project.mybasketballforum.service.impl.PostcardServiceImpl;
 import com.project.mybasketballforum.universal.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,14 @@ public class PostcardController {
             return Result.success("添加成功");
         }
         return Result.error("添加失败");
+    }
+
+    //更新帖子
+    @PostMapping("/updatePostcard")
+    public Result<String> updatePostcard(@RequestBody Postcard postcard){
+        if(postcardServiceimpl.updatePostcard(postcard)){
+            return Result.success("更新成功");
+        }
+        return Result.error("更新失败");
     }
 }

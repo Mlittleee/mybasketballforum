@@ -27,4 +27,7 @@ public interface PostcardService extends IService<Postcard> {
 
     //删除帖子
     boolean deletePostcard(Integer id);
+
+    //更新帖子
+    boolean updatePostcard(Postcard postcard);
 }
