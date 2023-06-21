@@ -260,12 +260,12 @@ class MyBasketballForumApplicationTests {
 
     @Test
     void listLiked(){
-        Integer userId = 5;
+        Integer userId = 2;
         List<Postcard> postlist = thumbServiceimpl.listLiked(userId);
         if(postlist == null)
             System.out.println("null");
-        for (Postcard post : postlist) {
-            System.out.println(post);
+        for (Postcard postcard : postlist) {
+            System.out.println(postcard);
         }
     }
 
@@ -273,5 +273,11 @@ class MyBasketballForumApplicationTests {
     void deletePost(){
         Integer postId = 14;
         postcardServiceimpl.deletePostcard(postId);
+    }
+
+    @Test
+    void getHeatOrderTest(){
+        String categoryName = "NBA";
+        System.out.println(categoryServiceImpl.getCategoryHeatOrder(categoryName));
     }
 }

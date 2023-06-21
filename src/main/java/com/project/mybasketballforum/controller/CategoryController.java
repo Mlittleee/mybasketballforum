@@ -106,16 +106,7 @@ public class CategoryController {
             return Result.error("没有查询到该板块下的帖子");
         }
     }
-
-    @GetMapping("/getCategoryDescription")
-    public Result<String> getCategoryDescription(@RequestParam String categoryName) {
-        if (categoryServiceimpl.getCategoryDescription(categoryName) != null) {
-            return Result.success(categoryServiceimpl.getCategoryDescription(categoryName));
-        } else {
-            return Result.error("查询板块简介失败");
-        }
-    }
-    //按板块名查询简介
+    //按板块名查询信息
     @GetMapping("/getCategoryInfo")
     public Result<CategoryInfoDto> getCategoryInfo(@RequestParam String categoryName) {
         if (categoryServiceimpl.getCategoryInfo(categoryName) != null) {
@@ -134,6 +125,17 @@ public class CategoryController {
             return Result.error("查询板块简介失败");
         }
     }
+
+    //按照板块名称查询热度(返回[2,5]的热度值）
+    @GetMapping("/getCategoryHeatOrder")
+    public Result<Integer> getCategoryHeatOrder(@RequestParam String categoryName) {
+        if (categoryServiceimpl.getCategoryHeatOrder(categoryName) != null) {
+            return Result.success(categoryServiceimpl.getCategoryHeatOrder(categoryName));
+        } else {
+            return Result.error("查询板块简介失败");
+        }
+    }
+
 
 }
 
