@@ -1,5 +1,6 @@
 package com.project.mybasketballforum.mapper;
 
+import com.project.mybasketballforum.dto.CategoryInfoDto;
 import com.project.mybasketballforum.pojo.Category;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,5 +15,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface CategoryMapper extends BaseMapper<Category> {
-
+    CategoryInfoDto getCategoryInfo(String categoryName);
 }

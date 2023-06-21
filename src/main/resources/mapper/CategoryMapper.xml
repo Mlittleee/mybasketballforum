@@ -10,9 +10,32 @@
         <result column="category_name" property="categoryName" />
     </resultMap>
 
+    <resultMap id="categoryInfoDtoMap" type="com.project.mybasketballforum.dto.CategoryInfoDto">
+        <result column="description" property="description" />
+        <result column="userId" property="userId" />
+        <result column="postCount" property="postCount" />
+        <result column="userCount" property="userCount" />
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         category_id, description, user_id, category_name
     </sql>
+    <select id="getCategoryInfo" resultMap="categoryInfoDtoMap">
+        SELECT
+            c.description,
+            c.user_id AS userId,
+            COUNT(p.post_id) AS postCount,
+            COUNT(DISTINCT p.user_id) AS userCount
+        FROM
+            category c
+                LEFT JOIN
+            post p ON c.category_name = p.category_name
+        WHERE
+            c.category_name = #{categoryName}
+        GROUP BY
+            c.description,
+            c.user_id
+    </select>
 
 </mapper>

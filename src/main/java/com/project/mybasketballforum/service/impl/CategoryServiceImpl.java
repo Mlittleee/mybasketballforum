@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -76,23 +77,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     //按板块名查询板块信息
     @Override
     public CategoryInfoDto getCategoryInfo(String categoryName) {
-        //根据name设置板块简介和创建者
-        LambdaQueryWrapper<Category> wrapper1 = new LambdaQueryWrapper<>();
-        wrapper1.eq(Category::getCategoryName, categoryName);
-        Category category = categoryMapper.selectOne(wrapper1);
-        CategoryInfoDto categoryInfoDto = new CategoryInfoDto();
-        categoryInfoDto.setDescription(category.getDescription());
-        categoryInfoDto.setUserId(category.getUserId());
-
-        //根据name设置板块文章数和活跃用户数目
-        LambdaQueryWrapper<Post> wrapper2 = new LambdaQueryWrapper<>();
-        wrapper2.eq(Post::getCategoryName, categoryName);
-        categoryInfoDto.setPostCount(postMapper.selectCount(wrapper2));
-//        wrapper2.groupBy(Post::getUserId);
-//        System.out.println(wrapper2);
-//        categoryInfoDto.setUserCount(postMapper.selectCount(wrapper2));
-
-        return categoryInfoDto;
+        return categoryMapper.getCategoryInfo(categoryName);
     }
-
 }
