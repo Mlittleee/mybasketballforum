@@ -281,4 +281,10 @@ class MyBasketballForumApplicationTests {
         Postcard post = postcardServiceimpl.getPostcardById(postId);
         System.out.println(post);
     }
+
+    @Test
+    void getHeatOrderTest(){
+        String categoryName = "NBA";
+        System.out.println(categoryServiceImpl.getCategoryHeatOrder(categoryName));
+    }
 }

@@ -127,5 +127,15 @@ public class CategoryController {
         }
     }
 
+    //按照板块名称查询热度(返回[2,5]的热度值）
+    @GetMapping("/getCategoryHeatOrder")
+    public Result<Integer> getCategoryHeatOrder(@RequestParam String categoryName) {
+        if (categoryServiceimpl.getCategoryHeatOrder(categoryName) != null) {
+            return Result.success(categoryServiceimpl.getCategoryHeatOrder(categoryName));
+        } else {
+            return Result.error("查询板块简介失败");
+        }
+    }
+
 }
 
