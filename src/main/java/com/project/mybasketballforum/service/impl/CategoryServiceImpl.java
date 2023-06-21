@@ -108,5 +108,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         return Math.toIntExact(postMapper.selectCount(wrapper));
     }
 
+    //更改板块描述信息
+    @Override
+    public boolean updateCategoryDescription(String categoryName, String description) {
+        LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Category::getCategoryName, categoryName);
+        Category category = categoryMapper.selectOne(wrapper);
+        category.setDescription(description);
+        return categoryMapper.updateById(category) == 1;
+    }
 
 }

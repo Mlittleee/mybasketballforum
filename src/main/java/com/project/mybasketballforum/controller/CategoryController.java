@@ -137,5 +137,15 @@ public class CategoryController {
         }
     }
 
+    //更改板块描述信息
+    @GetMapping("/updateCategoryDescription")
+    public Result<String> updateCategoryDescription(@RequestParam String categoryName, @RequestParam String description) {
+        if (categoryServiceimpl.updateCategoryDescription(categoryName, description)) {
+            return Result.success("修改板块简介成功");
+        } else {
+            return Result.error("修改板块简介失败");
+        }
+    }
+
 }
 

@@ -39,4 +39,7 @@ public interface CategoryService extends IService<Category> {
 
     //查询板块热度排序
     Integer getCategoryHeatOrder(String categoryName);
+
+    //更改板块描述信息
+    boolean updateCategoryDescription(String categoryName,String description);
 }
