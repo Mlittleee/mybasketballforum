@@ -261,10 +261,10 @@ class MyBasketballForumApplicationTests {
     @Test
     void listLiked(){
         Integer userId = 5;
-        List<Post> postlist = thumbServiceimpl.listLiked(userId);
+        List<Postcard> postlist = thumbServiceimpl.listLiked(userId);
         if(postlist == null)
             System.out.println("null");
-        for (Post post : postlist) {
+        for (Postcard post : postlist) {
             System.out.println(post);
         }
     }
