@@ -159,4 +159,17 @@ public class PostController {
             return Result.error("增加浏览量失败");
         }
     }
+
+    //更新帖子的内容
+    @GetMapping("/updatePostContent")
+    public Result<String> updatePostContent(@RequestParam Integer postId, @RequestParam String content) {
+        boolean success = postServiceimpl.updatePostContent(postId, content);
+        if (success) {
+            return Result.success("更新帖子内容成功");
+        } else {
+            return Result.error("更新帖子内容失败");
+        }
+    }
+
+    //
 }

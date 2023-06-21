@@ -30,4 +30,7 @@ public interface PostcardService extends IService<Postcard> {
 
     //更新帖子
     boolean updatePostcard(Postcard postcard);
+
+    //根据帖子id查询帖子
+    Postcard getPostcardById(Integer id);
 }

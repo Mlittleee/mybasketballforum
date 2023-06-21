@@ -122,4 +122,10 @@ public class PostcardServiceImpl extends ServiceImpl<PostcardMapper, Postcard> i
     public boolean updatePostcard(Postcard postcard) {
         return(this.updateById(postcard));
     }
+
+    //根据帖子id来获取帖子
+    @Override
+    public Postcard getPostcardById(Integer postId) {
+        return(this.getById(postId));
+    }
 }

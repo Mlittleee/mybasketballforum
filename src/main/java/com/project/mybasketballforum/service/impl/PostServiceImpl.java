@@ -129,4 +129,12 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         return updateById(post);
     }
 
+    //更新帖子的内容
+    @Override
+    public boolean updatePostContent(Integer postId, String content) {
+        Post post = this.baseMapper.selectById(postId);
+        post.setContent(content);
+        return updateById(post);
+    }
+
 }

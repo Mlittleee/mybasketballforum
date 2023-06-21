@@ -39,4 +39,7 @@ public interface PostService extends IService<Post> {
     //根据帖子id增加帖子浏览量
     boolean updateViewCount(Integer postId);
 
+    //更新帖子的内容
+    boolean updatePostContent(Integer postId, String content);
+
 }

@@ -48,4 +48,23 @@ public class PostcardController {
         }
         return Result.error("更新失败");
     }
+
+    //根据帖子id来获取帖子
+    @GetMapping("/getPostcardById")
+    public Result<Postcard> getPostcardById(@RequestParam Integer postId){
+        Postcard postcard = postcardServiceimpl.getPostcardById(postId);
+        if(postcard != null){
+            return Result.success(postcard);
+        }
+        return Result.error("获取失败");
+    }
+
+    //根据帖子id来删除帖子
+    @GetMapping("/deletePost")
+    public Result<String> deletePostcardById(@RequestParam Integer id){
+        if(postcardServiceimpl.deletePostcard(id)){
+            return Result.success("删除成功");
+        }
+        return Result.error("删除失败");
+    }
 }
