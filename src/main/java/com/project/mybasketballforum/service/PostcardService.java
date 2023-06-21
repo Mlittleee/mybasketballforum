@@ -24,4 +24,7 @@ public interface PostcardService extends IService<Postcard> {
 
     //添加点赞量
     boolean addLikeCount(Integer postId);
+
+    //删除帖子
+    boolean deletePostcard(Integer id);
 }

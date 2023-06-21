@@ -5,6 +5,8 @@ import com.project.mybasketballforum.dto.TagDto;
 import com.project.mybasketballforum.mapper.PostcardMapper;
 import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.pojo.Postcard;
+import com.project.mybasketballforum.pojo.Tag;
+import com.project.mybasketballforum.pojo.Thumb;
 import com.project.mybasketballforum.service.PostcardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,12 @@ public class PostcardServiceImpl extends ServiceImpl<PostcardMapper, Postcard> i
 
     @Autowired
     private UserServiceImpl userServiceimpl;
+
+    @Autowired
+    private ThumbServiceImpl thumbServiceimpl;
+
+    @Autowired
+    private PostServiceImpl postServiceimpl;
 
     @Autowired
     private TagServiceImpl tagServiceimpl;
@@ -66,6 +74,32 @@ public class PostcardServiceImpl extends ServiceImpl<PostcardMapper, Postcard> i
             this.save(postcard);
         }
     }
+
+    //删除帖子，同时删除和post相关的所有数据
+    @Override
+    public boolean deletePostcard(Integer id) {
+        //删除postcard
+        this.removeById(id);
+        //删除post
+        LambdaQueryWrapper<Post> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Post::getPostId,id);
+        Post post = postServiceimpl.getOne(queryWrapper);
+        postServiceimpl.removeById(post.getPostId());
+        //删除tag
+        LambdaQueryWrapper<Tag> queryWrapper1 = new LambdaQueryWrapper<>();
+        queryWrapper1.eq(Tag::getPostId,id);
+        tagServiceimpl.remove(queryWrapper1);
+        //删除thumb
+        LambdaQueryWrapper<Thumb> queryWrapper2 = new LambdaQueryWrapper<>();
+        queryWrapper2.eq(Thumb::getPostId,id);
+        thumbServiceimpl.remove(queryWrapper2);
+        //删除comment
+        /*LambdaQueryWrapper<Comment> queryWrapper3 = new LambdaQueryWrapper<>();
+        queryWrapper3.eq(Comment::getPostId,id);
+        commentServiceimpl.remove(queryWrapper3);*/
+        return true;
+    }
+
 
     //添加浏览量
     @Override

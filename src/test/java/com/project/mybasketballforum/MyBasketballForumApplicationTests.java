@@ -268,4 +268,10 @@ class MyBasketballForumApplicationTests {
             System.out.println(post);
         }
     }
+
+    @Test
+    void deletePost(){
+        Integer postId = 14;
+        postcardServiceimpl.deletePostcard(postId);
+    }
 }
