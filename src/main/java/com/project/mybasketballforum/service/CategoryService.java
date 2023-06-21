@@ -1,6 +1,7 @@
 package com.project.mybasketballforum.service;
 
 import com.project.mybasketballforum.dto.CategoryDto;
+import com.project.mybasketballforum.dto.CategoryInfoDto;
 import com.project.mybasketballforum.dto.PostCardListDto;
 import com.project.mybasketballforum.pojo.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -30,7 +31,8 @@ public interface CategoryService extends IService<Category> {
     //查询所有分类
     List<CategoryDto> selectAllCategory();
 
-    //按板块名查询板块的简介
-    String getCategoryDescription(String categoryName);
+    //按板块名查询板块内容
+    CategoryInfoDto getCategoryInfo(String categoryName);
+
 
 }

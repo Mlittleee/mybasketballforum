@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.project.mybasketballforum.dto.CategoryDto;
+import com.project.mybasketballforum.dto.CategoryInfoDto;
 import com.project.mybasketballforum.dto.PostCardListDto;
 import com.project.mybasketballforum.pojo.Category;
 import com.project.mybasketballforum.pojo.Postcard;
@@ -106,12 +107,13 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/getCategoryDescription")
-    public Result<String> getCategoryDescription(@RequestParam String categoryName) {
-        if (categoryServiceimpl.getCategoryDescription(categoryName) != null) {
-            return Result.success(categoryServiceimpl.getCategoryDescription(categoryName));
+    //按板块名查询简介
+    @GetMapping("/getCategoryInfo")
+    public Result<CategoryInfoDto> getCategoryInfo(@RequestParam String categoryName) {
+        if (categoryServiceimpl.getCategoryInfo(categoryName) != null) {
+            return Result.success(categoryServiceimpl.getCategoryInfo(categoryName));
         } else {
-            return Result.error("查询板块简介失败");
+            return Result.error("查询板块信息失败");
         }
     }
 }

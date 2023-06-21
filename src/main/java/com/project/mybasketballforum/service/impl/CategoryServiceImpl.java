@@ -5,9 +5,12 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.project.mybasketballforum.dto.CategoryDto;
+import com.project.mybasketballforum.dto.CategoryInfoDto;
 import com.project.mybasketballforum.mapper.CommentMapper;
+import com.project.mybasketballforum.mapper.PostMapper;
 import com.project.mybasketballforum.pojo.Category;
 import com.project.mybasketballforum.mapper.CategoryMapper;
+import com.project.mybasketballforum.pojo.Post;
 import com.project.mybasketballforum.service.CategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.project.mybasketballforum.universal.QueryPageParam;
@@ -31,6 +34,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     @Autowired
     private CategoryMapper categoryMapper;
+
+    @Autowired
+    private PostMapper postMapper;
 
     // 管理员新增板块
     @Override
@@ -67,13 +73,26 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         return categoryDtoList;
     }
 
-    //按板块名查询
+    //按板块名查询板块信息
     @Override
-    public String getCategoryDescription(String categoryName) {
-        LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Category::getCategoryName, categoryName);
-        Category category = categoryMapper.selectOne(wrapper);
-        return category.getDescription();
+    public CategoryInfoDto getCategoryInfo(String categoryName) {
+        //根据name设置板块简介和创建者
+        LambdaQueryWrapper<Category> wrapper1 = new LambdaQueryWrapper<>();
+        wrapper1.eq(Category::getCategoryName, categoryName);
+        Category category = categoryMapper.selectOne(wrapper1);
+        CategoryInfoDto categoryInfoDto = new CategoryInfoDto();
+        categoryInfoDto.setDescription(category.getDescription());
+        categoryInfoDto.setUserId(category.getUserId());
+
+        //根据name设置板块文章数和活跃用户数目
+        LambdaQueryWrapper<Post> wrapper2 = new LambdaQueryWrapper<>();
+        wrapper2.eq(Post::getCategoryName, categoryName);
+        categoryInfoDto.setPostCount(postMapper.selectCount(wrapper2));
+//        wrapper2.groupBy(Post::getUserId);
+//        System.out.println(wrapper2);
+//        categoryInfoDto.setUserCount(postMapper.selectCount(wrapper2));
+
+        return categoryInfoDto;
     }
 
 }

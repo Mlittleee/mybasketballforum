@@ -203,23 +203,6 @@ class MyBasketballForumApplicationTests {
         }
     }
 
-
-    //测试按板块名的查询
-    /*@Test
-    void getCategoryListPageTest() {
-        QueryPageParam query = new QueryPageParam();
-        query.setPageNum(1);
-        query.setPageSize(10);
-        HashMap<String, Object> param = new HashMap<>();
-        param.put("categoryName", "BA");
-        query.setParam(param);
-
-        List<Category> categoryList = categoryServiceImpl.getCategoryListPage(query);
-        for (Category category : categoryList) {
-            System.out.println(category);
-        }
-    }*/
-
     @Test
     void addFavorTest(){
         Integer userId = 2;
@@ -244,5 +227,20 @@ class MyBasketballForumApplicationTests {
         } else {
             System.out.println("取消收藏失败.");
         }
+    }
+
+    @Test
+    void getTagggggsByPostId(){
+        List<TagDto> tagList= tagServiceimpl.getTagsByPostId(8);
+        for (TagDto tag:tagList){
+            System.out.println(tag);
+        }
+    }
+
+    @Test
+    void getCategoryInfoTest(){
+        String categoryName = "NBA";
+        CategoryInfoDto categoryInfoDto = categoryServiceImpl.getCategoryInfo(categoryName);
+        System.out.println(categoryInfoDto);
     }
 }
