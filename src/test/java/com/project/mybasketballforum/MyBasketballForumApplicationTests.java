@@ -4,11 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.project.mybasketballforum.dto.*;
 import com.project.mybasketballforum.mapper.PostMapper;
 import com.project.mybasketballforum.pojo.*;
-import com.project.mybasketballforum.service.CommentService;
 import com.project.mybasketballforum.service.UserService;
 import com.project.mybasketballforum.service.impl.*;
 import com.project.mybasketballforum.universal.QueryPageParam;
-import com.project.mybasketballforum.universal.Result;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -48,6 +46,9 @@ class MyBasketballForumApplicationTests {
 
     @Autowired
     private PostcardServiceImpl postcardServiceimpl;
+
+    @Autowired
+    private ThumbServiceImpl thumbServiceimpl;
 
     @Test
     void contextLoads() {
@@ -242,5 +243,29 @@ class MyBasketballForumApplicationTests {
         String categoryName = "NBA";
         CategoryInfoDto categoryInfoDto = categoryServiceImpl.getCategoryInfo(categoryName);
         System.out.println(categoryInfoDto);
+    }
+
+    @Test
+    void addLike(){
+        Integer userId = 5;
+        Integer postId = 1;
+
+        boolean success = thumbServiceimpl.addLike(userId, postId); // 调用实例方法
+        if (success) {
+            System.out.println("添加点赞成功.");
+        } else {
+            System.out.println("添加点赞失败.");
+        }
+    }
+
+    @Test
+    void listLiked(){
+        Integer userId = 5;
+        List<Post> postlist = thumbServiceimpl.listLiked(userId);
+        if(postlist == null)
+            System.out.println("null");
+        for (Post post : postlist) {
+            System.out.println(post);
+        }
     }
 }

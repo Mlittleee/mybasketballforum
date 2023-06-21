@@ -20,16 +20,16 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("like")
-public class Like implements Serializable {
+@TableName("thumb")
+public class Thumb implements Serializable {
 
     private static final long serialVersionUID=1L;
 
     /**
      * 点赞id
      */
-    @TableId(value = "like_id", type = IdType.AUTO)
-    private Integer likeId;
+    @TableId(value = "thumb_id", type = IdType.AUTO)
+    private Integer thumbId;
 
     /**
      * 点赞所属用户id

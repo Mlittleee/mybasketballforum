@@ -15,4 +15,14 @@ public interface TipService extends IService<Tip> {
 
     //根据数据库中的数据来随机获取每日一句
     Tip getTip();
+
+    //新增每日一句
+    Boolean addTip(Tip tip);
+
+    //编辑每日一句
+    Boolean editTip(Tip tip);
+
+    //删除每日一句
+    Boolean deleteTip(Integer id);
+
 }

@@ -32,4 +32,23 @@ public class TipServiceImpl extends ServiceImpl<TipMapper, Tip> implements TipSe
         //根据随机数来获取每日一句
         return tipMapper.selectById(random);
     }
+
+    //添加每日一句
+    @Override
+    public Boolean addTip(Tip tip) {
+        return this.save(tip);
+    }
+
+    //编辑每日一句
+    @Override
+    public Boolean editTip(Tip tip) {
+        return this.updateById(tip);
+    }
+
+    //删除每日一句
+    @Override
+    public Boolean deleteTip(Integer id) {
+        return this.removeById(id);
+    }
+
 }

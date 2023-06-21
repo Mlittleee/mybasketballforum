@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mybasketballforum.mapper.ThumbMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.project.mybasketballforum.pojo.Thumb">
+        <id column="thumb_id" property="thumbId" />
+        <result column="user_id" property="userId" />
+        <result column="post_id" property="postId" />
+    </resultMap>
+
+     <!--通用查询结果列
+    <sql id="Base_Column_List">
+        like_id, userNumber, postNumber
+    </sql>
+    -->
+    <!--条件查询userNumber为特定值的Like实体对象-->
+    <select id="getLikeByUserNumber" resultMap="BaseResultMap">
+        select
+            thumb_id,
+            user_id,
+            post_id
+        from thumb
+        where user_id = #{userId}
+    </select>
+
+
+</mapper>
