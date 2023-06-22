@@ -67,6 +67,14 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return commentMapper.selectList(wrapper);
     }
 
+    //修改评论内容
+    @Override
+    public boolean updateComment(Integer commentId, String content) {
+        Comment comment = getById(commentId);
+        comment.setContent(content);
+        return updateById(comment);
+    }
+
     /**
      * 构建评论树
      * @param list

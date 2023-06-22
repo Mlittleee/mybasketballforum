@@ -43,5 +43,8 @@ public interface CommentService extends IService<Comment> {
     //根据postId来列出所有评论
     List<Comment> listAllComments(Integer postId);
 
+    //修改评论内容
+    boolean updateComment(Integer commentId, String content);
+
 
 }
