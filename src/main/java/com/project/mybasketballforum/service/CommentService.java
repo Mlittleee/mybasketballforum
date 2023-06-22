@@ -24,7 +24,7 @@ public interface CommentService extends IService<Comment> {
      * @param userId    评论所属用户id
      * @return 是否添加成功
      */
-    boolean addComment(String content, Integer upperId, Integer userId);
+    boolean addComment(String content, Integer postId, String userName);
 
     /**
      * 删除评论
@@ -39,5 +39,9 @@ public interface CommentService extends IService<Comment> {
      * @return 是否批量删除成功
      */
     boolean deleteComments(String commentIds);
+
+    //根据postId来列出所有评论
+    List<Comment> listAllComments(Integer postId);
+
 
 }

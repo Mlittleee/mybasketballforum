@@ -91,9 +91,9 @@ class MyBasketballForumApplicationTests {
     void AddCommentTest() {
         String content = "123test";
         Integer upperId = 0;
-        Integer userId = 1;
+        String userName = "";
 
-        boolean success = commentServiceimpl.addComment(content, upperId, userId); // 调用实例方法
+        boolean success = commentServiceimpl.addComment(content, upperId, userName); // 调用实例方法
         if (success) {
             System.out.println("Comment added successfully.");
         } else {
@@ -286,5 +286,15 @@ class MyBasketballForumApplicationTests {
     void getHeatOrderTest(){
         String categoryName = "NBA";
         System.out.println(categoryServiceImpl.getCategoryHeatOrder(categoryName));
+    }
+
+    //列出所有评论
+    @Test
+    void listAllComment(){
+        Integer postId = 1;
+        List<Comment> list = commentServiceimpl.listAllComments(postId);
+        for (Comment commentDto : list) {
+            System.out.println(commentDto);
+        }
     }
 }

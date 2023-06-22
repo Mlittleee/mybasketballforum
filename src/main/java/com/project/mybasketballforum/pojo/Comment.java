@@ -1,8 +1,10 @@
 package com.project.mybasketballforum.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -52,9 +54,13 @@ public class Comment implements Serializable {
     private Integer upperId;
 
     /**
-     * 评论所属用户id
+     * 评论所属用户名字
      */
-    private Integer userId;
+    private String userName;
 
+    /**
+     * 评论创建的时间
+     */
+    private String createTime;
 
 }

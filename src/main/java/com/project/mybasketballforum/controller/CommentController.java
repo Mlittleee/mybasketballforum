@@ -7,6 +7,7 @@ import com.project.mybasketballforum.universal.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,16 +22,18 @@ import java.util.List;
 @RequestMapping("/comment")
 @CrossOrigin
 public class CommentController {
+
+    @Resource
     private CommentService commentService;
 
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
 
-    @PostMapping("/addComment")
-    public Result<String> addComment(String content, Integer upperId, Integer userId) {
+    @GetMapping("/addComment")
+    public Result<String> addComment(@RequestParam String content,@RequestParam Integer postId,@RequestParam String userName) {
         //传入评论内容 附属id和用户id完成评论
-        if (commentService.addComment(content, upperId, userId)) {
+        if (commentService.addComment(content, postId, userName)) {
             return Result.success("评论成功");
         } else {
             return Result.error("评论失败");
@@ -47,13 +50,24 @@ public class CommentController {
         }
     }
 
-    @PostMapping("/deleteComments")
-    public Result<String> deleteComments(String commentIds) {
+    @GetMapping("/deleteComments")
+    public Result<String> deleteComments(@RequestParam String commentIds) {
         //传入批量删除的评论的id数组来完成删除
         if (commentService.deleteComments(commentIds)) {
             return Result.success("评论批量删除成功");
         } else {
             return Result.error("评论批量删除失败");
+        }
+    }
+
+    @GetMapping("/listAllComments")
+    public Result<List<Comment>> listAllComments(@RequestParam Integer postId) {
+        //传入帖子id来列出所有评论
+        List<Comment> comments = commentService.listAllComments(postId);
+        if (comments != null) {
+            return Result.success(comments);
+        } else {
+            return Result.error("还没有评论哦");
         }
     }
 

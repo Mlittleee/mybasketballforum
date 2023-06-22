@@ -1,5 +1,6 @@
 package com.project.mybasketballforum.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.project.mybasketballforum.pojo.Comment;
 import com.project.mybasketballforum.mapper.CommentMapper;
 import com.project.mybasketballforum.service.CommentService;
@@ -24,11 +25,18 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     private CommentMapper commentMapper;
 
     @Override
-    public boolean addComment(String content, Integer upperId, Integer userId) {
+    public boolean addComment(String content, Integer postId, String userName) {
         Comment comment = new Comment();
         comment.setContent(content);
-        comment.setUpperId(upperId);
-        comment.setUserId(userId);
+        comment.setPostId(postId);
+        comment.setUserName(userName);
+        int year = java.time.LocalDate.now().getYear();
+        int month = java.time.LocalDate.now().getMonthValue();
+        String monthStr = month < 10 ? "0" + month : "" + month;
+        int day = java.time.LocalDate.now().getDayOfMonth();
+        String dayStr = day < 10 ? "0" + day : "" + day;
+        String date = year + "-" + monthStr + "-" + dayStr;
+        comment.setCreateTime(date);
         return(this.save(comment));
     }
 
@@ -49,6 +57,14 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             }
         }
         return true;
+    }
+
+    //列出所有评论
+    @Override
+    public List<Comment> listAllComments(Integer postId) {
+        LambdaQueryWrapper<Comment> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Comment::getPostId, postId);
+        return commentMapper.selectList(wrapper);
     }
 
     /**
