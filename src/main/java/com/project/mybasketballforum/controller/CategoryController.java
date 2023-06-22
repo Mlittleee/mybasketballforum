@@ -156,16 +156,17 @@ public class CategoryController {
 
     //根据板块名称返回帖子百分比和用户百分比
     @GetMapping("/getCategoryPercentage")
-    public Result<List<Integer>> getCategoryPercentage(@RequestParam String categoryName) {
+    public Result<List<Long>> getCategoryPercentage(@RequestParam String categoryName) {
         CategoryInfoDto categoryInfoDto = categoryServiceimpl.getCategoryInfo(categoryName);
         Long postcardNum = categoryInfoDto.getPostCount();
         Long allPost = postcardMapper.selectCount(null);
-        Integer postPercentage = (int) (postcardNum / allPost * 100);
+        Long postPercentage = postcardNum *100 / allPost;
+
         //获取板块总用户数
         Long userNum = categoryInfoDto.getUserCount();
         Long allUser = postcardMapper.selectCount(null);
-        Integer userPercentage = (int) (userNum / allUser * 100);
-        List<Integer> list = new ArrayList<>();
+        Long userPercentage = userNum * 100 / allUser;
+        List<Long> list = new ArrayList<>();
         list.add(postPercentage);
         list.add(userPercentage);
         return Result.success(list);
