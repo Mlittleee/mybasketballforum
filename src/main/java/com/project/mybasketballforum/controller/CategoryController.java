@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.project.mybasketballforum.dto.CategoryDto;
 import com.project.mybasketballforum.dto.CategoryInfoDto;
 import com.project.mybasketballforum.dto.PostCardListDto;
+import com.project.mybasketballforum.mapper.PostcardMapper;
 import com.project.mybasketballforum.pojo.Category;
 import com.project.mybasketballforum.pojo.Postcard;
 import com.project.mybasketballforum.service.PostcardService;
@@ -17,6 +18,8 @@ import com.project.mybasketballforum.universal.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,6 +38,9 @@ public class CategoryController {
 
     @Autowired
     private PostcardService postcardService;
+
+    @Resource
+    private PostcardMapper postcardMapper;
 
     @Autowired
     private CategoryServiceImpl categoryServiceimpl;
@@ -117,6 +123,7 @@ public class CategoryController {
         }
     }
 
+
     //按照板块名称查询简介
     @GetMapping("/getCategoryDescription")
     public Result<String> getCategoryDescription(@RequestParam String categoryName) {
@@ -147,5 +154,21 @@ public class CategoryController {
         }
     }
 
+    //根据板块名称返回帖子百分比和用户百分比
+    @GetMapping("/getCategoryPercentage")
+    public Result<List<Integer>> getCategoryPercentage(@RequestParam String categoryName) {
+        CategoryInfoDto categoryInfoDto = categoryServiceimpl.getCategoryInfo(categoryName);
+        Long postcardNum = categoryInfoDto.getPostCount();
+        Long allPost = postcardMapper.selectCount(null);
+        Integer postPercentage = (int) (postcardNum / allPost * 100);
+        //获取板块总用户数
+        Long userNum = categoryInfoDto.getUserCount();
+        Long allUser = postcardMapper.selectCount(null);
+        Integer userPercentage = (int) (userNum / allUser * 100);
+        List<Integer> list = new ArrayList<>();
+        list.add(postPercentage);
+        list.add(userPercentage);
+        return Result.success(list);
+    }
 }
 
