@@ -129,6 +129,37 @@ public class PostController {
         }
     }
 
+    @PostMapping("/findMyPostCardPage")
+    public Result<List<PostCardListDto>> getMyPostList(@RequestBody QueryPageParam query) {
+
+        HashMap param = query.getParam();
+        Page<Postcard> postcardPage = new Page<>();
+        postcardPage.setSize(query.getPageSize());
+        postcardPage.setCurrent(query.getPageNum());
+
+        LambdaQueryWrapper<Post> wrapper1 = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<Postcard> wrapper2 = new LambdaQueryWrapper<>();
+        if (param != null) {
+            String userName = (String) param.get("userName");
+            if (StrUtil.isNotBlank(userName) && !userName.equals("null")) {
+                wrapper1.like(Post::getTitle, userName);
+                //将wrapper1转换为List
+                List<Post> postList = ipostService.list(wrapper1);
+                postcardServiceimpl.postToPostcard(postList);
+                wrapper2.like(Postcard::getUserName, userName);
+            }
+        }
+        IPage result = ipostcardService.page(postcardPage, wrapper2);
+        //获取总记录条数total
+        long total = result.getTotal();
+        //如果非空，则返回
+        if (result.getRecords().size() > 0) {
+            return Result.success(result.getRecords(), total);
+        } else {
+            return Result.error("没有查询到帖子");
+        }
+    }
+
     //根据帖子id返回帖子详情
     @GetMapping("/getPostDetail")
     public Result<PostViewDto> getPostById(@RequestParam Integer postId) {
