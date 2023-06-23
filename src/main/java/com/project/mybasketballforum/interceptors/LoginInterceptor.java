@@ -21,13 +21,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //判断用户是否登录
         if(UserHolder.getUser()==null){
-            //没有,需要拦截
-            //System.out.println("登录拦截器拦截");
             response.setStatus(408);
             return true;
         }
-        //System.out.println("登录拦截器通过");
-        //System.out.println(UserHolder.getUser());
         return true;
     }
 
