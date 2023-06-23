@@ -1,8 +1,4 @@
 # my_basketball_forum-front
-#### 几天做的一个简单的篮球论坛前端项目，由于时间较紧，只实现基本功能，还有些小bug，后续有时间会进行完善
-### 项目后端地址：[my_basketball_forum](https://github.com/Mlittleee/mybasketballforum)
-
-***前端主要有主界面，个人中心和后台管理系统三部分***
 
 项目主界面效果图
 ![image](https://github.com/Mlittleee/my_basketball_forum-front/blob/master/src/assets/ReadMeImage/img.png)
@@ -17,30 +13,12 @@
 7. 后台管理系统中可以管理用户，评论，帖子，标签，每日一句，
 
 ## 项目使用到的技术及插件
-* vue-cli
-* element-ui
-* vuex
-* vue-router
-* axios
-* mavon-editor
-* dayjs,buefy,bulma
-* vue-partical
-* font-awesome
+* springboot
+* mybatis-plus
+* Redis
+* Lombok
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
