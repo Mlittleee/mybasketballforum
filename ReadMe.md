@@ -210,9 +210,11 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 感谢以下贡献者对项目的贡献：
 
-[![Contributors](https://contrib.rocks/image?repo=Mlittleee/my_basketball_forum-front)](https://contrib.rocks/image?repo=Mlittleee/my_basketball_forum-front)
+- 前端部分
+  [![Contributors](https://contrib.rocks/image?repo=Mlittleee/my_basketball_forum-front)](https://contrib.rocks/image?repo=Mlittleee/my_basketball_forum-front)
 
-[![Contributors](https://contrib.rocks/image?repo=Mlittleee/mybasketballforum)](https://contrib.rocks/image?repo=Mlittleee/mybasketballforum)
+- 后端部分
+  [![Contributors](https://contrib.rocks/image?repo=Mlittleee/mybasketballforum)](https://contrib.rocks/image?repo=Mlittleee/mybasketballforum)
 
 欢迎对项目进行贡献和提供反馈意见(但我们不一定会修改 LOL）。
 
