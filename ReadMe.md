@@ -27,6 +27,9 @@
 - 界面美观：经过精心设计的用户界面，提供了良好的使用体验。
 - 功能齐全：具备发表帖子、浏览帖子、评论、点赞等功能，满足用户的交流需求。
 - 三大板块：主界面、用户中心和后台管理界面，方便用户进行浏览、操作和管理。
+  -- ![用户中心截图](https://github.com/Mlittleee/my_basketball_forum-front/blob/master/src/assets/ReadMeImage/img2.png)
+
+  ![管理员后台截图](https://github.com/Mlittleee/my_basketball_forum-front/blob/master/src/assets/ReadMeImage/img3.png)
 - 分类浏览：用户可以根据自己的兴趣选择不同板块来浏览特定分类下的帖子。
 - 自定义标签：用户在发帖时可以添加自定义标签，方便其他用户更好地了解帖子内容。
 - 后台管理：管理员可以对用户、帖子、评论、篮球名言和板块简介进行管理，还可查看可视化统计信息。
